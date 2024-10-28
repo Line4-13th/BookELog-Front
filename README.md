@@ -42,7 +42,7 @@ Each commit message should follow this format:
 Adopting this convention will make it easier to automate release notes, understand changes, and maintain code quality.
 
 ## Example Project Structure
-project-root/
+```project-root/
 ├── backend/               # Django backend directory
 │   ├── manage.py
 │   ├── backend_app/       # Django app for handling backend logic
@@ -90,4 +90,4 @@ project-root/
     │   ├── index.jsx
     │   └── ...
     ├── vite.config.js
-    └── package.json       # Frontend dependencies
+    └── package.json       # Frontend dependencies```
