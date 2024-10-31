@@ -40,3 +40,16 @@
 .read-the-docs {
   color: #888;
 }
+/* 
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid blue;
+  }
+
+  .navbar {
+    position: static;
+    box-shadow: none;
+  }
+} */
