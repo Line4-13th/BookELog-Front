@@ -1,7 +1,8 @@
 .Up-container {
-  position: absolute;
-  top: 20px;
-  left: 16px;
+  margin-top: 20px;
+  margin-left: 15px;
+  height: 60px; /* 상단바의 고정 높이 설정 */
+  width: 50px;
 }
 
 .logoimg {
