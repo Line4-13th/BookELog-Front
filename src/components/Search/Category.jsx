@@ -1,12 +1,13 @@
 import book from "../../assets/Search/OpenBook.png";
 import "./Category.scss";
 
-const Category = ({ title }) => {
+const Category = ({ title, onClick }) => {
   return (
-    <div className="container">
-      <img src={book} alt="" />
+    <div className="container" onClick={onClick}>
+      {" "}
+      {/* 클릭 이벤트 추가 */}
+      <img src={book} alt="Book Icon" />
       <p>{title}</p>
-      {/* 여기서 title 부분 상위 페이지 컴포넌트에서 props로 넘기기 */}
     </div>
   );
 };

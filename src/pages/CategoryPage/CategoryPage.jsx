@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import UpBar from "../../components/UpBar/UpBar";
 import Search from "../../components/Search/Search";
 import Category from "../../components/Search/Category";
@@ -15,6 +17,13 @@ const CategoryPage = () => {
     "외국어",
     "ddd",
   ];
+
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (category) => {
+    navigate(`/category/${category}`); // 해당 카테고리 경로로 이동
+  };
+
   return (
     <div>
       <UpBar />
@@ -23,7 +32,12 @@ const CategoryPage = () => {
         <Search />
         <div className="grid-container">
           {categories.map((category, index) => (
-            <Category key={index} title={category} className="grid-container" /> // Category 컴포넌트를 여러 개 렌더링
+            <Category
+              key={index}
+              title={category}
+              className="grid-container"
+              onClick={() => handleCategoryClick(category)}
+            /> // Category 컴포넌트를 여러 개 렌더링
           ))}
           <NavBar />
         </div>
