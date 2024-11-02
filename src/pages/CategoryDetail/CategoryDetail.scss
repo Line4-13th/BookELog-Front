@@ -8,3 +8,10 @@
   min-height: 100vh; /* 화면 전체 높이 */
   border: 1px solid blue;
 }
+
+.center {
+  display: flex;
+  margin-left: 15px;
+  align-items: center;
+  border: 1px solid red;
+}

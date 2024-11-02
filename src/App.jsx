@@ -3,10 +3,12 @@ import Home from "./pages/Home/Home";
 import Category from "./pages/CategoryPage/CategoryPage";
 import NavBar from "./components/Navbar";
 import CategoryDetail from "./pages/CategoryDetail/CategoryDetail";
+import UpBar from "./components/UpBar/UpBar";
 
 function App() {
   return (
     <Router>
+      <UpBar />
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />

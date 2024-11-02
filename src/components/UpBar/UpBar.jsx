@@ -1,10 +1,13 @@
 import Logo from "../../assets/Logo.png";
 import "./UpBar.scss";
+import { Link } from "react-router-dom";
 
 const UpBar = () => {
   return (
     <div className="Up-container">
-      <img src={Logo} className="logoimg" />
+      <Link to="/">
+        <img src={Logo} className="logoimg" />
+      </Link>
     </div>
   );
 };
