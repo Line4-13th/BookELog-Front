@@ -1,0 +1,38 @@
+.searchButton {
+  width: 261.62px;
+  flex-shrink: 0;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px; /* 137.5% */
+  letter-spacing: -0.408px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  img {
+    position: relative;
+  }
+
+  .searchInput {
+    /* 기본 스타일 초기화 */
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    appearance: none; /* 브라우저 기본 스타일 없애기 */
+    color: #d0caca;
+    width: 250px;
+    margin-left: 10px;
+
+    &::placeholder {
+      color: #888888; /* 원하는 placeholder 색상 */
+      opacity: 1; /* 필요시 투명도 조정 */
+    }
+  }
+}

@@ -1,13 +1,15 @@
 // import React from 'react';
-import Home from './pages/Home/Home';
+
+import Category from "./pages/CategoryPage/CategoryPage";
+import Home from "./pages/Home/Home";
 
 function App() {
-
   return (
     <>
-      <Home />
+      {/* <Home /> */}
+      <Category />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
