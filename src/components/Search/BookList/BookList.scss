@@ -1,0 +1,23 @@
+.booklist-container {
+  display: grid;
+  padding: 15px;
+  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  min-width: 350px;
+  max-width: 350px;
+  padding: 10px;
+  border: 1px solid purple;
+  max-height: 400px;
+  overflow-y: auto;
+  margin: 0 auto; /* 수평 중앙 정렬 */
+  justify-items: center; /* 각 그리드 아이템을 수평 중앙 정렬 */
+}
+
+.book-item {
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid orange;
+}
