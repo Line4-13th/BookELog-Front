@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import "./Booklist.scss";
+import { useNavigate } from "react-router-dom";
+import UpBar from "../../UpBar/UpBar";
 
 const BookList = ({ category }) => {
   const [books, setBooks] = useState([]);
+  const navigate = useNavigate();
 
   // 목업 데이터
   const mockBooks = [
@@ -43,20 +46,30 @@ const BookList = ({ category }) => {
     setBooks(mockBooks);
   }, [category]);
 
+  const handleBookClick = (bookId) => {
+    navigate(`/book/${bookId}`);
+  };
   return (
-    <div className="booklist-container">
-      {books.length > 0 ? (
-        books.map((book) => (
-          <div className="book-item" key={book.book_id}>
-            <img src={book.bookcover} alt={book.title} />
-            <div className="mark">
-              <p>{book.introduction}</p>
+    <div>
+      {/* <UpBar /> */}
+      <div className="booklist-container">
+        {books.length > 0 ? (
+          books.map((book) => (
+            <div className="book-item" key={book.book_id}>
+              <img
+                src={book.bookcover}
+                alt={book.title}
+                onClick={() => handleBookClick(book.book_id)}
+              />
+              <div className="mark">
+                <p>{book.introduction}</p>
+              </div>
             </div>
-          </div>
-        ))
-      ) : (
-        <p>책 목록이 없습니다.</p>
-      )}
+          ))
+        ) : (
+          <p>책 목록이 없습니다.</p>
+        )}
+      </div>
     </div>
   );
 };

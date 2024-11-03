@@ -1,0 +1,84 @@
+button {
+  /* 기본 스타일 제거 */
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit; /* 부모 요소의 폰트를 상속 */
+  color: inherit; /* 부모 요소의 색상 상속 */
+  text-align: inherit; /* 부모의 텍스트 정렬 상속 */
+  cursor: pointer; /* 버튼에 마우스를 올렸을 때 포인터 모양 */
+  margin-top: 20px;
+  margin-left: 15px;
+  .backbutton {
+    display: flex;
+
+    height: 60px; /* 상단바의 고정 높이 설정 */
+    width: 50px;
+  }
+}
+
+.whole-container {
+  height: 100vh; /* 화면 전체 높이를 차지하도록 설정 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 375px;
+  max-width: 375px;
+  min-height: 100vh; /* 화면 전체 높이 */
+  margin-top: 20px;
+}
+
+.bookdetail-container {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid orange;
+  justify-content: center;
+}
+
+h2 {
+  color: #fdfdfd;
+  font-family: Poppins;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.author-info {
+  color: #fdfdfd;
+  font-family: Poppins;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.publication-info {
+  color: #fdfdfd;
+  font-family: Poppins;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.purchase-button {
+  width: 120px;
+  height: 43px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #ffc41f;
+  color: black;
+  color: #404040;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-align: center;
+}
+
+// .p {
+//   line-height: %;
+// }

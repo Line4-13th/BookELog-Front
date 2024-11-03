@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-// import UpBar from "../../components/UpBar/UpBar";
+import UpBar from "../../components/UpBar/UpBar";
 import Search from "../../components/Search/Search";
 import Category from "../../components/Search/Category";
 import "./CategoryPage.scss";
@@ -26,7 +26,7 @@ const CategoryPage = () => {
 
   return (
     <div>
-      {/* <UpBar /> */}
+      <UpBar />
       <CategoryTitle title="카테고리" />
       <div className="Category-container">
         <Search />

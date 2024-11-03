@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import "./CategoryDetail.scss";
-// import UpBar from "../../components/UpBar/UpBar";
+import UpBar from "../../components/UpBar/UpBar";
 import CategoryTitle from "../../components/Search/CategoryTitle";
 import Search from "../../components/Search/Search";
 import BookList from "../../components/Search/BookList/BookList";
@@ -10,7 +10,7 @@ const CategoryDetail = () => {
 
   return (
     <div>
-      {/* <UpBar /> */}
+      <UpBar />
       <CategoryTitle title={category} />
 
       <div className="center">
