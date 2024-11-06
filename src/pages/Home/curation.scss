@@ -1,0 +1,26 @@
+.curation-container {
+  width: 100%;
+  // border: 1px solid red;
+  box-sizing: border-box;
+
+  .curation-title {
+    color: white;
+    font-size: 22px;
+    margin: 1vh 2vh;
+    // border: 1px solid green;
+  }
+}
+
+.curation-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3vh;
+  margin: 2vh 4vh;
+  justify-items: center;
+}
+
+.curation-items img {
+  min-width: 100%;
+  height: auto;
+  // border: 1px solid blue;
+}

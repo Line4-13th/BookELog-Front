@@ -1,0 +1,41 @@
+.recommend-container {
+  width: 100%;
+  // border: 1px solid red;
+  margin-left: 10px;
+
+  .recommend-title {
+    color: white;
+    font-size: 22px;
+    margin: 1vh 2vh;
+    // border: 1px solid green;
+  }
+
+  .recommend-items {
+    width: 100%;
+    min-height: 250px;
+
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scrollbar-width: none; // Firefox
+
+    box-sizing: border-box;
+    // border: 1px solid blue;
+  }
+
+  .recommend-items::-webkit-scrollbar {
+    display: none; // Chrome, Safari, and newer Edge
+  }
+}
+
+.recommend-items img {
+  min-width: 48%;
+  margin-right: -30px;
+}
+
+@media (max-width: 376px) {
+  .recommend-container {
+    top: 22%;
+  }
+}
