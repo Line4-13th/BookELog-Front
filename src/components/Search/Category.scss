@@ -1,20 +1,42 @@
+// .container {
+//   display: flex;
+//   width: 60px;
+//   height: 50px;
+//   padding: 30px 50px;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   // gap: 7px;
+//   flex-shrink: 0;
+//   border-radius: 10px;
+//   border: 2px solid rgba(253, 253, 253, 0.3);
+
+//   p {
+//     color: #fdfdfd;
+//     text-align: center;
+//     font-size: 14px;
+//     font-style: normal;
+//     font-weight: 400;
+//     line-height: normal;
+//   }
+// }
+
 .container {
   display: flex;
-  width: 60px;
-  height: 50px;
-  padding: 30px 50px;
+  width: 3.75rem; /* 60px → rem으로 변경 (기본 폰트 크기 16px 기준) */
+  height: 3.125rem; /* 50px → rem으로 변경 */
+  padding: 1.875rem 3.125rem; /* 30px 50px → rem으로 변경 */
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  // gap: 7px;
   flex-shrink: 0;
-  border-radius: 10px;
-  border: 2px solid rgba(253, 253, 253, 0.3);
+  border-radius: 0.625rem; /* 10px → rem으로 변경 */
+  border: 0.125rem solid rgba(253, 253, 253, 0.3); /* 2px → rem으로 변경 */
 
   p {
     color: #fdfdfd;
     text-align: center;
-    font-size: 14px;
+    font-size: 0.875rem; /* 14px → rem으로 변경 */
     font-style: normal;
     font-weight: 400;
     line-height: normal;
