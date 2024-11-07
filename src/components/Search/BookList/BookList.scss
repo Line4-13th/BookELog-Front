@@ -43,4 +43,5 @@
   background-repeat: no-repeat; /* 이미지 반복 제거 */
   background-position: center; /* 이미지 중앙 배치 */
   height: fit-content; /* 컨테이너 높이 자동 조정 */
+  z-index: 10;
 }
