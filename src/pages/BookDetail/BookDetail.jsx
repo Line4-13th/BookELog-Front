@@ -8,7 +8,16 @@ import OneSentence from "../../components/ReviewPage/OneSentence";
 const BookDetail = () => {
   const navigate = useNavigate();
 
-  const [selectedItem, setSelectedItem] = useState(0); // SwiftUI의 @State 변환
+  const [selectedItem, setSelectedItem] = useState(0);
+  const [reviews, setReviews] = useState([
+    { id: 1, userName: "유저1", reviewText: "정말 좋은 책이에요!" },
+    {
+      id: 2,
+      userName: "유저2",
+      reviewText: "생각할 거리를 많이 주는 책입니다.",
+    },
+    { id: 3, userName: "유저3", reviewText: "추천합니다!" },
+  ]);
 
   const book = {
     title: "나는 소망한다 내게 금지된 것을",
@@ -16,14 +25,13 @@ const BookDetail = () => {
     publisher: "쓰다",
     publicationDate: "2019년 4월",
     cover: "https://via.placeholder.com/100",
-    rating: 4, // 별점은 5점 만점 중 4점으로 예시
+    rating: 4,
   };
 
   const goBack = () => {
     navigate(-1);
   };
 
-  // 세그먼티드 컨트롤 선택 핸들러
   const handleSelection = (index) => {
     setSelectedItem(index);
   };
@@ -35,16 +43,13 @@ const BookDetail = () => {
       </button>
 
       <div className="whole-container">
-        {/* 전체 컨테이너 */}
         <div className="bookdetail-container">
-          {/* 왼쪽 책 커버 */}
           <div className="left">
             <div className="book-cover">
               <img src={book.cover} alt={book.title} />
             </div>
           </div>
 
-          {/* 오른쪽 책 정보 */}
           <div className="whole-right">
             <div className="right">
               <div className="book-details">
@@ -52,7 +57,6 @@ const BookDetail = () => {
                 <p className="author-info">{`${book.author} 저`}</p>
                 <p className="publication-info">{`${book.publisher} | ${book.publicationDate}`}</p>
                 <button className="purchase-button">구매하기</button>
-                {/* 세그먼티드 컨트롤 (한 줄 리뷰, 책 소개, Q&A) */}
               </div>
             </div>
           </div>
@@ -76,7 +80,6 @@ const BookDetail = () => {
           >
             Q&A
           </button>
-          {/* 세그먼트에 따라 다르게 표시되는 내용 */}
         </div>
         <div className="content">
           {selectedItem === 0 && (
@@ -84,8 +87,15 @@ const BookDetail = () => {
               <div className="overay">
                 <p className="review">당신의 한 줄 리뷰를 남겨주세요!</p>
               </div>
-              <div className="onesentence">
-                <OneSentence />
+              <div className="onesentence-list">
+                {reviews.map((review) => (
+                  <OneSentence
+                    className="onesentence"
+                    key={review.id}
+                    userName={review.userName}
+                    reviewText={review.reviewText}
+                  />
+                ))}
               </div>
             </div>
           )}

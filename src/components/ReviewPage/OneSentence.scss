@@ -1,28 +1,21 @@
-.sentence-container {
-  display: flex;
-  justify-content: center;
-  height: 15rem; /* 화면 전체 높이 */
-  border: 1px solid rgb(0, 255, 94);
-  overflow-y: scroll;
+.background {
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 0.5rem;
+  width: 83.2vw;
+  border-radius: 18px;
+  background: #fff5e4;
+  color: #53301f;
+  border: 1px solid rgb(198, 0, 0);
+  height: fit-content;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #feecce 0%, #ffc66b 100%);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.36);
+  border: 1px solid blue;
+}
 
-  .background {
-    font-size: 0.8rem;
-    text-align: center;
-    padding: 0.5rem;
-    width: 83.2vw;
-    border-radius: 18px;
-    background: #fff5e4;
-    color: #53301f;
-    border: 1px solid rgb(198, 0, 0);
-    height: fit-content;
-    border-radius: 20px;
-    background: linear-gradient(180deg, #feecce 0%, #ffc66b 100%);
-    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.36);
-  }
-
-  .user-name {
-    text-align: left;
-    width: 3rem;
-    margin-top: -0.1rem;
-  }
+.user-name {
+  text-align: left;
+  width: 3rem;
+  margin-top: -0.1rem;
 }
