@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./BookDetail.scss";
 import BackButton from "../../assets/BackButton.svg";
+import magnifyingglass from "../../assets/Search/magnifyingglass.svg";
+import OneSentence from "../../components/ReviewPage/OneSentence";
 
 const BookDetail = () => {
   const navigate = useNavigate();
@@ -43,42 +45,67 @@ const BookDetail = () => {
           </div>
 
           {/* 오른쪽 책 정보 */}
-          <div className="right">
-            <div className="book-details">
-              <h2>{`《${book.title}》`}</h2>
-              <p className="author-info">{`${book.author} 저`}</p>
-              <p className="publication-info">{`${book.publisher} | ${book.publicationDate}`}</p>
-              <button className="purchase-button">구매하기</button>
-              {/* 세그먼티드 컨트롤 (한 줄 리뷰, 책 소개, Q&A) */}
-              <div className="segmented-control">
-                <button
-                  className={selectedItem === 0 ? "active" : ""}
-                  onClick={() => handleSelection(0)}
-                >
-                  한 줄 리뷰
-                </button>
-                <button
-                  className={selectedItem === 1 ? "active" : ""}
-                  onClick={() => handleSelection(1)}
-                >
-                  책 소개
-                </button>
-                <button
-                  className={selectedItem === 2 ? "active" : ""}
-                  onClick={() => handleSelection(2)}
-                >
-                  Q&A
-                </button>
-              </div>
-
-              {/* 세그먼트에 따라 다르게 표시되는 내용 */}
-              <div className="content">
-                {selectedItem === 0 && <p>한 줄 리뷰 내용</p>}
-                {selectedItem === 1 && <p>책 소개 내용</p>}
-                {selectedItem === 2 && <p>Q&A 내용</p>}
+          <div className="whole-right">
+            <div className="right">
+              <div className="book-details">
+                <h2>{`《${book.title}》`}</h2>
+                <p className="author-info">{`${book.author} 저`}</p>
+                <p className="publication-info">{`${book.publisher} | ${book.publicationDate}`}</p>
+                <button className="purchase-button">구매하기</button>
+                {/* 세그먼티드 컨트롤 (한 줄 리뷰, 책 소개, Q&A) */}
               </div>
             </div>
           </div>
+        </div>
+        <div className="segmented-control">
+          <button
+            className={selectedItem === 0 ? "active" : ""}
+            onClick={() => handleSelection(0)}
+          >
+            한 줄 리뷰
+          </button>
+          <button
+            className={selectedItem === 1 ? "active" : ""}
+            onClick={() => handleSelection(1)}
+          >
+            책 소개
+          </button>
+          <button
+            className={selectedItem === 2 ? "active" : ""}
+            onClick={() => handleSelection(2)}
+          >
+            Q&A
+          </button>
+          {/* 세그먼트에 따라 다르게 표시되는 내용 */}
+        </div>
+        <div className="content">
+          {selectedItem === 0 && (
+            <div>
+              <div className="overay">
+                <p className="review">당신의 한 줄 리뷰를 남겨주세요!</p>
+              </div>
+              <div className="onesentence">
+                <OneSentence />
+              </div>
+            </div>
+          )}
+
+          {selectedItem === 1 && (
+            <div className="introduction-overay">
+              <p className="introduction">책 소개 내용</p>
+            </div>
+          )}
+
+          {selectedItem === 2 && (
+            <div className="overay">
+              <div className="second-overay">
+                <img src={magnifyingglass} />
+                <p className="question">
+                  책 내용에 대한 궁금증을 작성해보세요!
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

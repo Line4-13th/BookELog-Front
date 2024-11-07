@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Booklist.scss";
 import { useNavigate } from "react-router-dom";
-import UpBar from "../../UpBar/UpBar";
+// import UpBar from "../../UpBar/UpBar";
 
 const BookList = ({ category }) => {
   const [books, setBooks] = useState([]);

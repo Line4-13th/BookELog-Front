@@ -41,8 +41,9 @@
 .searchButton {
   display: flex;
   align-items: center;
-  width: 80%; /* 부모 요소에 대해 상대적인 너비 */
-  max-width: 330px; /* 최대 너비 설정 */
+  width: 80vw;
+  height: 1rem;
+  // max-width: 330px; /* 최대 너비 설정 */
   padding: 1rem; /* rem 단위로 패딩 */
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.15);
@@ -52,6 +53,7 @@
   font-weight: 400;
   line-height: 1.375; /* line-height를 rem 단위로 */
   letter-spacing: -0.02em; /* em 단위로 조정 */
+  margin-bottom: 1.5rem;
 
   img {
     position: relative;

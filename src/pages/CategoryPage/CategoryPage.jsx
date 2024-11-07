@@ -28,18 +28,21 @@ const CategoryPage = () => {
     <div>
       <UpBar />
       <CategoryTitle title="카테고리" />
-      <div className="Category-container">
-        <Search />
-        <div className="grid-container">
-          {categories.map((category, index) => (
-            <Category
-              key={index}
-              title={category}
-              className="grid-container"
-              onClick={() => handleCategoryClick(category)}
-            /> // Category 컴포넌트를 여러 개 렌더링
-          ))}
-          <NavBar />
+      <div className="all">
+        <div className="Category">
+          <Search />
+          <div className="Category-container">
+            {categories.map((category, index) => (
+              <Category
+                key={index}
+                title={category}
+                className="grid-container"
+                onClick={() => handleCategoryClick(category)}
+              /> // Category 컴포넌트를 여러 개 렌더링
+            ))}
+
+            <NavBar />
+          </div>
         </div>
       </div>
     </div>
