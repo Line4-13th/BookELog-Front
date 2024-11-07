@@ -5,6 +5,10 @@ import NavBar from "./components/Navbar";
 import CategoryDetail from "./pages/CategoryDetail/CategoryDetail";
 import BookDetail from "./pages/BookDetail/BookDetail";
 // import UpBar from "./components/UpBar/UpBar";
+// import React from 'react';
+import NavBar from "./components/Navbar";
+import Home from "./pages/Home/Home";
+import CurationItem from "./pages/Home/CurationItem";
 
 function App() {
   return (
@@ -19,6 +23,11 @@ function App() {
       </Routes>
     </Router>
   );
+  <>
+    {/* <Home />
+      <NavBar /> */}
+    <CurationItem />
+  </>;
 }
 
 export default App;
