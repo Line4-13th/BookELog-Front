@@ -1,0 +1,41 @@
+.record-login-container {
+  color: #452E20;
+  // border: 1px solid blue;
+  width: 70%;
+
+  .record-login-title {
+    font-size: 20px;
+  }
+}
+
+.record-login-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+
+  // border: 1px solid black;
+  color: #452E20;
+  font-size: 20px;
+
+  .record-login-button {
+    margin-top: 0;
+    margin: 2vh;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 30px;
+    font-weight: 300;
+    box-shadow: 1px 1px 1vh #452e201b;
+  }
+
+  .record-signup-button {
+    margin: 2vh;
+    margin-top: 0;
+    width: 100%;
+    background-color: #FFEBB3;
+    font-weight: 300;
+    border-radius: 30px;
+    box-shadow: 1px 1px 1vh #452e201b;
+  }
+}

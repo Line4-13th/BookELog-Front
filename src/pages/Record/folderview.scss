@@ -1,0 +1,58 @@
+.folder-view {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+
+  width: 90vw;
+  height: 60vh;
+
+  box-sizing: border-box;
+  // border: 1px solid black;
+}
+
+.folder {
+  width: 100%;
+  height: 20vh;
+  text-align: center;
+  cursor: pointer;
+
+  margin-bottom: 0;
+
+  // border: 1px solid black;
+  box-sizing: border-box;
+}
+
+.folder-name {
+  margin-top: -1.5vh;
+}
+
+.folder-icon {
+  width: 100%;
+  height: 90%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 8px;
+
+  // border: 1px solid black;
+}
+
+.new-folder {
+  position: relative;
+  // border: 1px solid black;
+
+  .new-folder-input {
+    border: 0.4px solid #6E6E6E;
+    outline: 0;
+    border-radius: 5px;
+    height: 22px;
+    width: 60%;
+    text-align: center;
+    font-size: 16px;
+  
+    position: absolute;
+    left: -13%;
+    top: 85%;
+    transform: translateX(50%);
+  }
+}

@@ -1,17 +1,15 @@
 // import React from 'react';
 import NavBar from './components/Navbar';
-import Home from './pages/Home/Home';
-import CurationItem from './pages/Home/CurationItem';
+import Record from './pages/Record/Record';
 
 function App() {
 
   return (
     <>
-      {/* <Home />
-      <NavBar /> */}
-      <CurationItem />
+      <Record />
+      <NavBar />
     </>
   )
 }
 
-export default App
+export default App;
