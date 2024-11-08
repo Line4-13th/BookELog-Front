@@ -9,7 +9,7 @@ const CategoryDetail = () => {
   const { category } = useParams(); // URL의 카테고리 파라미터 가져오기
 
   return (
-    <div>
+    <div className="whole">
       <UpBar />
       <CategoryTitle title={category} />
 

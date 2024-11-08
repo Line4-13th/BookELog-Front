@@ -84,6 +84,9 @@
 // //   line-height: %;
 // // }
 
+.whole {
+  height: 100vh;
+}
 button {
   /* 기본 스타일 제거 */
   background: none;
@@ -212,12 +215,18 @@ h2 {
 }
 
 // 한줄리뷰, 책소개, 궁금증 스타일링
+input {
+  all: unset;
+  margin-bottom: 10px;
+}
 
 .overay {
   background: rgba(246, 246, 246, 0.15);
   width: 100vw;
+  padding-top: 10px;
   display: flex;
   justify-content: center;
+  align-items: center;
 
   .review {
     font-size: 0.8rem;
@@ -270,10 +279,10 @@ h2 {
   align-items: center; /* 수평 중앙 정렬 */
   justify-content: flex-start; /* 스크롤 가능한 콘텐츠의 시작을 위로 설정 */
   width: 100%;
-  height: 8rem;
-  align-items: center; /* 수평 중앙 정렬 */
+  height: fit-content;
+  margin-bottom: 100px;
+  overflow-y: auto;
   gap: 1rem; /* 아이템 간 간격 유지 */
   border: 1px solid red;
-  overflow-y: scroll;
   scroll-behavior: smooth; /* 부드러운 스크롤 */
 }

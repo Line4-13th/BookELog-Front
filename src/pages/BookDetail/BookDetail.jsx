@@ -2,8 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./BookDetail.scss";
 import BackButton from "../../assets/BackButton.svg";
-import magnifyingglass from "../../assets/Search/magnifyingglass.svg";
+// import magnifyingglass from "../../assets/Search/magnifyingglass.svg";
 import OneSentence from "../../components/ReviewPage/OneSentence";
+import Question from "../../components/ReviewPage/Question";
+import StarRating from "../../components/Star/Star";
 
 const BookDetail = () => {
   const navigate = useNavigate();
@@ -37,7 +39,7 @@ const BookDetail = () => {
   };
 
   return (
-    <div>
+    <div className="whole">
       <button className="back-button" onClick={goBack}>
         <img src={BackButton} alt="뒤로가기" />
       </button>
@@ -56,6 +58,7 @@ const BookDetail = () => {
                 <h2>{`《${book.title}》`}</h2>
                 <p className="author-info">{`${book.author} 저`}</p>
                 <p className="publication-info">{`${book.publisher} | ${book.publicationDate}`}</p>
+                <StarRating />
                 <button className="purchase-button">구매하기</button>
               </div>
             </div>
@@ -85,7 +88,10 @@ const BookDetail = () => {
           {selectedItem === 0 && (
             <div>
               <div className="overay">
-                <p className="review">당신의 한 줄 리뷰를 남겨주세요!</p>
+                <input
+                  className="review"
+                  placeholder="당신의 한 줄 리뷰를 남겨주세요!"
+                ></input>
               </div>
               <div className="onesentence-list">
                 {reviews.map((review) => (
@@ -106,16 +112,7 @@ const BookDetail = () => {
             </div>
           )}
 
-          {selectedItem === 2 && (
-            <div className="overay">
-              <div className="second-overay">
-                <img src={magnifyingglass} />
-                <p className="question">
-                  책 내용에 대한 궁금증을 작성해보세요!
-                </p>
-              </div>
-            </div>
-          )}
+          {selectedItem === 2 && <Question />}
         </div>
       </div>
     </div>

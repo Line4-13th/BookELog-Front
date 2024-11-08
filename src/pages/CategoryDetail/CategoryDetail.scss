@@ -17,12 +17,15 @@
 //   border: 1px solid red;
 // }
 
+.whole {
+  margin-top: 12px;
+}
 .detail-container {
   display: flex;
   flex-direction: column;
   align-items: center; /* 수평 중앙 정렬 */
   width: 100vw;
-  min-height: 100vh; /* 화면 전체 높이 */
+  // min-height: 100vh; /* 화면 전체 높이 */
   border: 0.0625rem solid blue; /* 1px → rem으로 변경 */
 }
 

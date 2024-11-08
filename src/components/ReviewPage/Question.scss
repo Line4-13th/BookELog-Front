@@ -1,0 +1,123 @@
+.question-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: rgba(246, 246, 246, 0.15);
+  height: auto; /* 높이를 내용에 따라 자동 조정 */
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0; /* 상하 여백 추가 */
+  border: 1px solid red;
+
+  .question-back {
+    width: 85vw;
+    text-align: center;
+    border-radius: 18px;
+    background: #4db0ff;
+    height: 3.8rem;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem; /* 좌우 여백 추가 */
+
+    img {
+      margin-right: 10px; /* 이미지와 입력창 간 간격 추가 */
+    }
+
+    input {
+      all: unset;
+      width: 100%;
+      color: white;
+      font-size: 0.9rem;
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.7); /* 더 부드러운 placeholder 색상 */
+      }
+    }
+  }
+}
+
+.back-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 15px;
+  background: #f6f6f6;
+  height: auto;
+  font-size: 0.8rem;
+  padding: 1rem;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+
+  .more {
+    color: #6c6c6c;
+    text-align: right; /* 텍스트를 오른쪽 정렬 */
+    margin-bottom: 1rem; /* 아래 요소와 간격 추가 */
+    font-size: 0.9rem;
+  }
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  width: 85vw;
+  border-radius: 21px;
+  background: linear-gradient(180deg, #5ec6f5 0%, #007aff 100%);
+  height: auto;
+  padding: 1rem;
+  margin-bottom: 1rem; /* 다음 요소와 간격 추가 */
+
+  .up-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 수직 정렬 */
+  }
+
+  .name {
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+
+  .question-text {
+    margin-top: 0.5rem;
+    text-align: left; /* 텍스트를 왼쪽 정렬 */
+    color: white;
+    line-height: 1.5; /* 가독성을 위한 줄 간격 추가 */
+  }
+}
+
+.white-container {
+  display: flex;
+  flex-direction: column;
+  width: 85vw;
+  border-radius: 21px;
+  background: #fff;
+  height: auto;
+  padding: 1rem;
+  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.15);
+  margin-bottom: 1rem;
+
+  .white-up-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 1rem;
+    margin: 0;
+    color: #007aff;
+  }
+
+  .answer-name {
+    color: #999;
+    font-size: 0.8rem;
+  }
+
+  .answer-text {
+    margin-top: 0.5rem;
+    text-align: left;
+    color: #333;
+    line-height: 1.5;
+  }
+}
