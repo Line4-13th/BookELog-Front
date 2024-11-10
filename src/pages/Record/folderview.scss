@@ -4,10 +4,13 @@
   gap: 16px;
 
   width: 90vw;
-  height: 60vh;
+  height: 80vh;
 
   box-sizing: border-box;
   // border: 1px solid black;
+
+  position: absolute;
+  top: -1.5vh;
 }
 
 .folder {
@@ -16,14 +19,14 @@
   text-align: center;
   cursor: pointer;
 
-  margin-bottom: 0;
+  margin-bottom: -1vh;
 
   // border: 1px solid black;
   box-sizing: border-box;
 }
 
 .folder-name {
-  margin-top: -1.5vh;
+  margin-top: -2vh;
 }
 
 .folder-icon {

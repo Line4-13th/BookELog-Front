@@ -4,6 +4,7 @@ import Calendar from 'react-calendar';
 import FolderView from './FolderView';
 import './Calendar.css';
 // import axios from 'axios';
+import add from '../../assets/add.svg';
 
 function RecordToggle() {
   const [active, setActive] = useState('calendar');
@@ -66,6 +67,15 @@ function RecordToggle() {
           <FolderView />
         )}
       </section>
+      {active === 'file' && (
+        <button className="add-record-button">
+          <img
+            src={add}
+            alt="add book report button"
+            className="add-record-image"
+          />
+        </button>
+      )}
     </div>
   )
 }

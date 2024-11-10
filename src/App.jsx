@@ -1,12 +1,12 @@
 // import React from 'react';
 import NavBar from './components/Navbar';
-import Record from './pages/Record/Record';
+import BookSearch from './pages/Record/BookSearch';
 
 function App() {
 
   return (
     <>
-      <Record />
+      <BookSearch />
       <NavBar />
     </>
   )

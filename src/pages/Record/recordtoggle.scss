@@ -57,11 +57,31 @@
 
   // border: 1px solid black;
 
-  height: 82%;
+  height: 78%;
   width: 90%;
   position: relative;
 
   display:flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.add-record-button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+
+  position: absolute;
+  bottom: 5%;
+}
+
+.add-record-image {
+  height: 7.5vh;
+  width: 7.5vh;
+}
+
+@media (max-height: 700px) {
+  .add-record-button {
+    bottom: 10%;
+  }
 }
