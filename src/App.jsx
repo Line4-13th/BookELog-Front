@@ -1,17 +1,15 @@
 // import React from 'react';
 import NavBar from './components/Navbar';
-import Home from './pages/Home/Home';
-import CurationItem from './pages/Home/CurationItem';
+import BookSearch from './pages/Record/BookSearch';
 
 function App() {
 
   return (
     <>
-      {/* <Home />
-      <NavBar /> */}
-      <CurationItem />
+      <BookSearch />
+      <NavBar />
     </>
   )
 }
 
-export default App
+export default App;

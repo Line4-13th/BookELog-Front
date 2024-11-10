@@ -1,0 +1,41 @@
+.record-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #FFF9E7;
+}
+
+.record-header {
+  position: relative;
+  height: 9%;
+
+  border-bottom: 0.5px solid #53301F;
+  box-sizing: border-box;
+
+  display: flex;
+  padding: 5vh 3vh 8.5vh 3vh;
+
+  .record-logo {
+    position: absolute;
+  }
+
+  .record-title {
+    // border: 1px solid blue;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -20%);
+
+    color: #53301F;
+    font-size: 22px;
+  }
+}
+
+.record-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // border: 1px solid blue;
+  box-sizing: border-box;
+
+  height: 80vh;
+}
