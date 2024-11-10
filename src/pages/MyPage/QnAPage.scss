@@ -1,0 +1,115 @@
+/* src/pages/Home/QnAPage.scss */
+
+.qna-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #5c3d2e; /* 배경 색상 */
+    color: #333;
+    height: calc(100vh); /* 화면 높이에서 NavBar 높이만큼 뺌 */
+    padding: 0 20px; /* 양쪽만 패딩을 주고 위쪽은 제거 */
+    padding-bottom: 100px; /* NavBar와의 겹침 방지를 위한 하단 여백 */
+    box-sizing: border-box;
+    overflow-y: auto; /* 스크롤 가능하도록 설정 */
+  }
+  
+  .qna-header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 중앙 정렬을 위해 추가 */
+    padding: 10px 0; /* 헤더의 위쪽과 아래쪽 간격 최소화 */
+    margin: 0; /* 여백 제거 */
+    color: #fff;
+  }
+  
+  .qna-header button {
+    position: absolute;
+    left: 0; /* 왼쪽에 고정 */
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .qna-header h2 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin: 0;
+  }
+  
+  .qa-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .qa-card {
+    background-color: #f9f4eb;
+    color: #333;
+    padding: 15px;
+    border-radius: 15px;
+  
+    .qa-book {
+      font-weight: bold;
+      color: #005c9e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  
+      .questioner {
+        color: #999;
+        font-size: 0.8rem;
+      }
+  
+      .view-more {
+        color: #333;
+        font-size: 0.8rem;
+        cursor: pointer;
+      }
+    }
+  
+    .question {
+      background-color: #42a5f5;
+      color: #fff;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 10px;
+  
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+  
+      span {
+        display: block;
+        font-size: 0.8rem;
+        color: #e0f7fa;
+        margin-top: 5px;
+      }
+    }
+  
+    .answer {
+      background-color: #ffffff;
+      color: #333;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 10px;
+  
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+  
+      span {
+        display: block;
+        font-size: 0.8rem;
+        color: #b0bec5;
+        margin-top: 5px;
+      }
+    }
+  }
+  
+  
+  
+  

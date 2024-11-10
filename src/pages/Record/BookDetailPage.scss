@@ -1,0 +1,274 @@
+// src/pages/Record/bookdetailpage.scss
+.book-detail-container {
+  background-color: #FFF9E7;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 2vh 4vw;
+
+  .book-detail-header {
+    position: relative;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #53301F;
+
+    .back-button, .save-button {
+      background-color: #e0d5c0;
+      padding: 1vh 4vw;
+      border: none;
+      border-radius: 5px;
+      font-size: 2vh;
+      color: #53301F;
+      cursor: pointer;
+    }
+
+    .folder-dropdown {
+      font-size: 2.5vh;
+      color: #53301F;
+      position: relative;
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 30vw;
+        border: 1px solid #53301F;
+        background-color: #FFF9E7;
+        border-radius: 5px;
+        overflow: hidden;
+        z-index: 100;
+
+        p {
+          margin: 0;
+          padding: 1vh 2vw;
+          font-size: 2vh;
+          cursor: pointer;
+          border-bottom: 1px solid #53301F;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          &:hover {
+            background-color: #e0d5c0;
+          }
+        }
+      }
+    }
+  }
+
+  .title-container {
+    font-size: 3vh;
+    font-weight: bold;
+    color: #333;
+    margin-top: 2vh;
+    margin-left: 2vw;
+  }
+
+  .book-detail-content {
+    margin-top: 1vh;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    height: auto;
+
+    .book-info {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: row;
+
+      .book-cover {
+        width: 25vw;
+        height: auto;
+      }
+
+      .book-details {
+        margin-left: 3vw;
+        font-size: 2vh;
+        line-height: 1.5;
+
+        .book-name {
+          font-size: 2.5vh;
+          font-weight: bold;
+          margin-bottom: 1vh;
+        }
+
+        .author,
+        .rating,
+        .date {
+          font-size: 1.8vh;
+          margin-top: 0.5vh;
+        }
+
+        .rating {
+          display: flex;
+          align-items: center;
+
+          .stars {
+            margin-left: 0.5vw;
+            color: gold;
+          }
+        }
+
+        .date {
+          cursor: pointer;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  .rating-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fdfdfd;
+    padding: 2vh 4vw;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    z-index: 1000;
+
+    p {
+      font-size: 2vh;
+      margin-bottom: 1vh;
+    }
+
+    span {
+      font-size: 3vh;
+      cursor: pointer;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1vh;
+
+      button {
+        background-color: #e0d5c0;
+        border: none;
+        border-radius: 5px;
+        padding: 0.5vh 2vw;
+        font-size: 1.8vh;
+        color: #53301F;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+  }
+}
+
+.react-calendar {
+  width: 100%;
+  max-width: 320px;
+  border: none;
+  border-radius: 10px;
+  padding: 1em; // 달력 내 간격 조정
+}
+
+.react-calendar__navigation {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  margin-bottom: 0.5em;
+  font-size: 1.2em;
+}
+
+.react-calendar__navigation button {
+  color: #53301F;
+  font-weight: bold;
+  font-size: 1.1em;
+  background: none;
+  padding: 0.5rem 1rem;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: #e6e6e6;
+  border-radius: 5px;
+}
+
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+  color: #333;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #FF3B30;
+}
+
+.react-calendar__tile {
+  max-width: 100%;
+  text-align: center;
+  font-size: 0.8em;
+  padding: 1em 0.5em;
+  background: none;
+  border-radius: 5px;
+}
+
+.react-calendar__tile--now {
+  background: #f0f0f0;
+  font-weight: bold;
+  color: #53301F;
+  border-radius: 50%;
+}
+
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background: #e0d5c0;
+}
+
+.react-calendar__tile--active {
+  background: #53301F;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background: #3f1f08;
+}
+
+.react-calendar__tile--hasActive {
+  background: #53301F;
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  

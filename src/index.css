@@ -6,7 +6,7 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: transparent;
-  background: no-repeat center center url(./assets/background.png);
+  background: no-repeat center center url(./assets/background.svg);
   background-size: cover;
 
   font-synthesis: none;
