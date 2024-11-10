@@ -193,11 +193,11 @@ abbr[title] {
 }
 
 .react-calendar__tile--hasActive {
-  /* background: #3f1f089a;
+  background: #3f1f089a;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 5vh; */
+  height: 5vh;
 }
 
 .react-calendar__tile--hasActive:enabled:hover,

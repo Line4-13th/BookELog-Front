@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // useNavigate import 추가
 import './recordtoggle.scss';
 import Calendar from 'react-calendar';
 import FolderView from './FolderView';
@@ -9,6 +10,7 @@ import add from '../../assets/add.svg';
 function RecordToggle() {
   const [active, setActive] = useState('calendar');
   const [value, onChange] = useState(new Date());
+  const navigate = useNavigate(); // useNavigate 초기화
   // const [markedDates, setMarkedDates] = useState([]);
 
   // useEffect(() => {
@@ -33,6 +35,10 @@ function RecordToggle() {
 
   const handleToggle = (value) => {
     setActive(value);
+  };
+
+  const handleAddButtonClick = () => {
+    navigate('/booksearch'); // 책 검색 페이지로 이동
   };
 
   return (
@@ -68,7 +74,7 @@ function RecordToggle() {
         )}
       </section>
       {active === 'file' && (
-        <button className="add-record-button">
+        <button className="add-record-button" onClick={handleAddButtonClick}>
           <img
             src={add}
             alt="add book report button"
