@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Question.scss";
 import magnifying from "../../assets/Search/magnifyingglass.svg";
+import QuestionItem from "./QuestionItem";
 
 const mockData = [
   {
@@ -36,7 +37,7 @@ const mockData = [
 ];
 
 const Question = () => {
-  const [selectedQuestion, setSelectedQuestion] = useState(null); // 선택된 질문 상태
+  const [selectedQuestion, setSelectedQuestion] = useState(null);
 
   const handleOpenModal = (question) => {
     setSelectedQuestion(question);
@@ -66,23 +67,12 @@ const Question = () => {
             <button onClick={() => handleOpenModal(item)} className="more">
               더보기
             </button>
-            {/* 질문 영역 */}
-            <div className="question">
-              <div className="up-container">
-                <img src={magnifying} alt="magnifying" />
-                <p className="name">{item.userName}</p>
-              </div>
-              <p className="question-text">{item.questionText}</p>
-            </div>
-
-            {/* 답변 영역 - 첫 번째 답변만 표시 */}
-            <div className="white-container">
-              <div className="white-up-container">
-                <h1>A</h1>
-                <p className="answer-name">{item.userName}</p>
-              </div>
-              <p className="answer-text">{item.answers[0].answerText}</p>
-            </div>
+            <QuestionItem
+              userName={item.userName}
+              questionText={item.questionText}
+              answers={item.answers} // 첫 번째 답변만 표시
+              showAllAnswers={false}
+            />
           </div>
         ))}
       </div>
@@ -91,13 +81,12 @@ const Question = () => {
       {selectedQuestion && (
         <div className="modal-overlay" onClick={handleCloseModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>질문: {selectedQuestion.questionText}</h2>
-            {selectedQuestion.answers.map((answer) => (
-              <div key={answer.id} className="answer-item">
-                <h3>답변 {answer.id}</h3>
-                <p>{answer.answerText}</p>
-              </div>
-            ))}
+            <QuestionItem
+              userName={selectedQuestion.userName}
+              questionText={selectedQuestion.questionText}
+              answers={selectedQuestion.answers} // 모든 답변 표시
+              showAllAnswers={true}
+            />
             <button onClick={handleCloseModal} className="close-modal">
               닫기
             </button>

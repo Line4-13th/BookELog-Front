@@ -61,7 +61,7 @@ const BookList = ({ category }) => {
                 alt={book.title}
                 onClick={() => handleBookClick(book.book_id)}
               />
-              <div className="mark">
+              <div className="introductionmark">
                 <p>{book.introduction}</p>
               </div>
             </div>
