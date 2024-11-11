@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Question.scss";
 import magnifying from "../../assets/Search/magnifyingglass.svg";
 import QuestionItem from "./QuestionItem";
@@ -47,6 +47,18 @@ const Question = () => {
     setSelectedQuestion(null);
   };
 
+  useEffect(() => {
+    if (selectedQuestion) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto"; // Cleanup
+    };
+  }, [selectedQuestion]);
+
   return (
     <div>
       {/* 질문 입력 영역 */}
@@ -70,8 +82,8 @@ const Question = () => {
             <QuestionItem
               userName={item.userName}
               questionText={item.questionText}
-              answers={item.answers} // 첫 번째 답변만 표시
-              showAllAnswers={false}
+              answers={item.answers}
+              showAllAnswers={false} // 첫 번째 답변만 표시
             />
           </div>
         ))}
@@ -84,8 +96,8 @@ const Question = () => {
             <QuestionItem
               userName={selectedQuestion.userName}
               questionText={selectedQuestion.questionText}
-              answers={selectedQuestion.answers} // 모든 답변 표시
-              showAllAnswers={true}
+              answers={selectedQuestion.answers}
+              showAllAnswers={true} // 모든 답변 표시
             />
             <button onClick={handleCloseModal} className="close-modal">
               닫기
