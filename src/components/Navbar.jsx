@@ -1,5 +1,7 @@
-import { useState } from "react";
-import "./navbar.scss";
+// src/components/Navbar.jsx
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import './navbar.scss';
 
 const icons = import.meta.glob("../assets/bookelog_nav_icons/*.svg", {
   eager: true,
@@ -12,10 +14,29 @@ const iconMap = Object.keys(icons).reduce((acc, path) => {
 }, {});
 
 function NavBar() {
-  const [selectedIcon, setSelectedIcon] = useState("home");
+  const [selectedIcon, setSelectedIcon] = useState('home');
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleIconClick = (icon) => {
-    setSelectedIcon(selectedIcon === icon ? null : icon);
+    setSelectedIcon(icon); // Update selectedIcon before navigation
+
+    // Navigate to corresponding route based on the icon
+    switch (icon) {
+      case 'home':
+        navigate('/');
+        break;
+      case 'category':
+        navigate('/curation');
+        break;
+      case 'record':
+        navigate('/record'); // Navigate to Record page
+        break;
+      case 'mypage':
+        navigate('/mypage');
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -63,3 +84,5 @@ function NavBar() {
 }
 
 export default NavBar;
+
+
