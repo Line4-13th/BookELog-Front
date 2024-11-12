@@ -6,7 +6,7 @@
   gap: 1rem; /* 아이템 간격 */
   width: 80vw;
   border: 1px solid purple;
-  max-height: 20rem; /* 400px → rem으로 변경 */
+  max-height: 30rem; /* 400px → rem으로 변경 */
   overflow-y: auto;
   margin: 0 auto; /* 수평 중앙 정렬 */
   justify-items: center; /* 각 그리드 아이템 수평 중앙 정렬 */
@@ -20,7 +20,7 @@
   border: 1px solid orange;
   padding: 0.5rem; /* 내부 여백 추가 */
   box-sizing: border-box;
-  height: 100%; /* 컨테이너 높이 자동 조정 */
+  height: fit-content; /* 컨테이너 높이 자동 조정 */
 
   flex-shrink: 0;
 }

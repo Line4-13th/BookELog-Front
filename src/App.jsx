@@ -17,6 +17,8 @@ import CategoryDetail from "./pages/CategoryDetail/CategoryDetail";
 import BookDetail from "./pages/BookDetail/BookDetail";
 import Question from "./components/ReviewPage/Question";
 import AnswerList from "./components/ReviewPage/AnswerList";
+import RecordCheck from "./pages/RecordCheck/RecordCheck";
+import FullContent from "./pages/RecordCheck/FullContent";
 
 function App() {
   return (
@@ -29,6 +31,9 @@ function App() {
         <Route path="/book/:id" element={<BookDetail />} />
         <Route path="/" element={<Question />} /> {/* 메인 질문 페이지 */}
         <Route path="/answers/:id" element={<AnswerList />} />{" "}
+        <Route path="/recordcheck" element={<RecordCheck />} />
+        <Route path="/fullcontent" element={<FullContent />} />
+        {/* RecordCheck 페이지 */}
         {/* 답변 리스트 페이지 */}
         <Route path="/curation" element={<Curation />} />
         <Route path="/booksearch" element={<BookSearch />} />
