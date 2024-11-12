@@ -1,0 +1,174 @@
+.question-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: rgba(246, 246, 246, 0.15);
+  height: auto; /* 높이를 내용에 따라 자동 조정 */
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0; /* 상하 여백 추가 */
+  border: 1px solid red;
+
+  .question-back {
+    width: 85vw;
+    text-align: center;
+    border-radius: 18px;
+    background: #4db0ff;
+    height: 3.8rem;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem; /* 좌우 여백 추가 */
+
+    img {
+      margin-right: 10px; /* 이미지와 입력창 간 간격 추가 */
+    }
+
+    input {
+      all: unset;
+      width: 100%;
+      color: white;
+      font-size: 0.9rem;
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.7); /* 더 부드러운 placeholder 색상 */
+      }
+    }
+  }
+}
+
+.back-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 15px;
+  background: #f6f6f6;
+  height: auto;
+  font-size: 0.8rem;
+  padding: 1rem;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  border: 1px solid black;
+
+  .question-ccontainer {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid orange;
+  }
+
+  .more {
+    color: #6c6c6c;
+    text-align: right; /* 텍스트를 오른쪽 정렬 */
+    margin-bottom: 1rem; /* 아래 요소와 간격 추가 */
+    font-size: 0.9rem;
+    width: 3rem;
+    justify-items: flex-end;
+  }
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  width: 85vw;
+  border-radius: 21px;
+  background: linear-gradient(180deg, #5ec6f5 0%, #007aff 100%);
+  height: auto;
+  padding: 1rem;
+  margin-bottom: 1rem; /* 다음 요소와 간격 추가 */
+
+  .up-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 수직 정렬 */
+  }
+
+  .name {
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+
+  .question-text {
+    margin-top: 0.5rem;
+    text-align: center; /* 텍스트를 왼쪽 정렬 */
+    color: white;
+    line-height: 1.5; /* 가독성을 위한 줄 간격 추가 */
+  }
+}
+
+.white-container {
+  display: flex;
+  flex-direction: column;
+  width: 85vw;
+  border-radius: 21px;
+  background: #fff;
+  height: auto;
+  padding: 1rem;
+  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.15);
+  margin-bottom: 1rem;
+  border: 1px solid black;
+  margin-top: 0; /* 상단 여백 제거 */
+
+  .white-up-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 1rem;
+    margin: 0;
+    color: #007aff;
+  }
+
+  .answer-name {
+    color: #999;
+    font-size: 0.8rem;
+  }
+
+  .answer-text {
+    margin-top: 0.5rem;
+    text-align: center;
+    color: #333;
+    line-height: 1.5;
+  }
+}
+
+/* 모달 관련 스타일 추가 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 어두운 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100vw;
+  box-sizing: border-box;
+  max-height: 80vh; /* 모달 최대 높이 설정 */
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 */
+  overflow-y: auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.answer-item {
+  margin-bottom: 10px;
+}
+
+.close-modal {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

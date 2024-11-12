@@ -1,6 +1,6 @@
 // src/pages/Record/bookdetailpage.scss
 .book-detail-container {
-  background-color: #FFF9E7;
+  background-color: #fff9e7;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -13,21 +13,22 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #53301F;
+    border-bottom: 1px solid #53301f;
 
-    .back-button, .save-button {
+    .back-button,
+    .save-button {
       background-color: #e0d5c0;
       padding: 1vh 4vw;
       border: none;
       border-radius: 5px;
       font-size: 2vh;
-      color: #53301F;
+      color: #53301f;
       cursor: pointer;
     }
 
     .folder-dropdown {
       font-size: 2.5vh;
-      color: #53301F;
+      color: #53301f;
       position: relative;
 
       .dropdown-menu {
@@ -35,8 +36,8 @@
         top: 100%;
         left: 0;
         width: 30vw;
-        border: 1px solid #53301F;
-        background-color: #FFF9E7;
+        border: 1px solid #53301f;
+        background-color: #fff9e7;
         border-radius: 5px;
         overflow: hidden;
         z-index: 100;
@@ -46,7 +47,7 @@
           padding: 1vh 2vw;
           font-size: 2vh;
           cursor: pointer;
-          border-bottom: 1px solid #53301F;
+          border-bottom: 1px solid #53301f;
 
           &:last-child {
             border-bottom: none;
@@ -156,7 +157,7 @@
         border-radius: 5px;
         padding: 0.5vh 2vw;
         font-size: 1.8vh;
-        color: #53301F;
+        color: #53301f;
         cursor: pointer;
       }
     }
@@ -190,7 +191,7 @@
 }
 
 .react-calendar__navigation button {
-  color: #53301F;
+  color: #53301f;
   font-weight: bold;
   font-size: 1.1em;
   background: none;
@@ -213,7 +214,7 @@
 }
 
 .react-calendar__month-view__days__day--weekend {
-  color: #FF3B30;
+  color: #ff3b30;
 }
 
 .react-calendar__tile {
@@ -228,7 +229,7 @@
 .react-calendar__tile--now {
   background: #f0f0f0;
   font-weight: bold;
-  color: #53301F;
+  color: #53301f;
   border-radius: 50%;
 }
 
@@ -238,7 +239,7 @@
 }
 
 .react-calendar__tile--active {
-  background: #53301F;
+  background: #53301f;
   color: white;
   font-weight: bold;
   border-radius: 50%;
@@ -250,25 +251,6 @@
 }
 
 .react-calendar__tile--hasActive {
-  background: #53301F;
+  background: #53301f;
   color: white;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  

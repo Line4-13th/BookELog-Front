@@ -1,18 +1,17 @@
 // import { useState } from 'react'
-import './home.scss';
+import "./home.scss";
 import Recommend from "./Recommend";
 import Curation from "./Curation";
-import logo from '../../../public/book-e-log-white.svg';
-import profile from '../../assets/profile.svg'
-import glass from '../../assets/magnifyingglass.svg'
+import logo from "../../../public/book-e-log-white.svg";
+import profile from "../../assets/profile.svg";
+import glass from "../../assets/magnifyingglass.svg";
 
 function Home() {
-
   return (
     <div className="home-container">
       <header>
         <div className="home-header">
-          <img 
+          <img
             src={logo}
             alt="Book-E-Log logo"
             onClick={() => null}
@@ -26,13 +25,10 @@ function Home() {
           />
         </div>
         <form className="home-search">
-          <img
-            src={glass}
-            alt="Magnifying Glass Icon"
-          />
-          <input 
+          <img src={glass} alt="Magnifying Glass Icon" />
+          <input
             type="text"
-            placeholder='Search'
+            placeholder="Search"
             onChange={(e) => e.target.value}
           />
         </form>
@@ -40,7 +36,7 @@ function Home() {
       <Recommend />
       <Curation />
     </div>
-  )
-};
+  );
+}
 
 export default Home;
