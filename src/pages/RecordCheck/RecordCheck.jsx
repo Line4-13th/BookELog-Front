@@ -38,7 +38,7 @@ function RecordCheck() {
   };
 
   return (
-    <div className="record-container">
+    <div className="rrecord-container">
       <header className="book-detail-header">
         <button className="back-button" onClick={handleBack}>
           ←
