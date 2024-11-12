@@ -52,3 +52,19 @@
   height: auto;
   margin-bottom: 2rem;
 }
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+.ssave-button,
+.share-button {
+  width: 7rem;
+  height: 3rem;
+  background: #6b503f;
+  border-radius: 10px;
+  text-align: center;
+  color: #fdfdfd;
+}

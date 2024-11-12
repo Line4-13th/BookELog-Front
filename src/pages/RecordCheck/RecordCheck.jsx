@@ -27,6 +27,15 @@ function RecordCheck() {
   };
 
   const imageUrls = extractImageUrl(recordContent);
+  const defaultImage = "path/to/your/default-image.png"; // 대체 이미지 경로
+
+  // 이미지가 없을 경우에도 클릭 시 이동할 수 있게 하도록 처리
+  const handleNoImageClick = () => {
+    // 이미지가 없더라도 이동하도록 처리
+    navigate("/fullcontent", {
+      state: { bookTitle, recordContent, imageUrl: defaultImage },
+    });
+  };
 
   return (
     <div className="record-container">
@@ -41,15 +50,22 @@ function RecordCheck() {
 
       <div className="record-check-content">
         <div className="content-row">
-          {imageUrls.map((url, index) => (
-            <div className="content-item" key={index}>
-              <img
-                src={url} // 이미지 URL 사용
-                alt={`Content ${index}`}
-                onClick={() => handleImageClick(url)} // 클릭 시 해당 이미지의 URL 전달
-              />
+          {imageUrls.length > 0 ? (
+            imageUrls.map((url, index) => (
+              <div className="content-item" key={index}>
+                <img
+                  src={url || defaultImage} // 이미지가 없으면 기본 대체 이미지 사용
+                  alt={`Content ${index}`}
+                  onClick={() => handleImageClick(url)} // 클릭 시 해당 이미지의 URL 전달
+                />
+              </div>
+            ))
+          ) : (
+            <div className="content-item" onClick={handleNoImageClick}>
+              <p>이미지가 없습니다</p>{" "}
+              {/* 이미지가 없으면 텍스트로 대체, 클릭 시 이동 */}
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>
