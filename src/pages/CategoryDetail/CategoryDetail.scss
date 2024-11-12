@@ -1,0 +1,39 @@
+// .detail-container {
+//   display: flex;
+//   flex-direction: column;
+//   // justify-content: center; /* 수직 중앙 정렬 */
+//   align-items: center; /* 수평 중앙 정렬 */
+//   width: 100%;
+//   // max-width: 375px;
+//   min-height: 100vh; /* 화면 전체 높이 */
+//   border: 1px solid blue;
+// }
+
+// .center {
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   border: 1px solid red;
+// }
+
+.whole {
+  margin-top: 12px;
+}
+.detail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 수평 중앙 정렬 */
+  width: 100vw;
+  // min-height: 100vh; /* 화면 전체 높이 */
+  border: 0.0625rem solid blue; /* 1px → rem으로 변경 */
+}
+
+.center {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 수평 중앙 정렬 */
+  justify-content: center;
+  border: 0.0625rem solid red; /* 1px → rem으로 변경 */
+}

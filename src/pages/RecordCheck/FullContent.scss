@@ -1,0 +1,70 @@
+.full-content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  background: var(--back2, #fff9e7);
+}
+
+.full-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.book-detail-header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.back-button {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.full-content div {
+  width: 100%;
+  max-width: 60rem; /* 텍스트가 길어지지 않도록 최대 폭 제한 */
+  font-size: 1.8rem; /* 기본 글자 크기 설정 */
+  line-height: 1.6;
+  margin-top: 2rem;
+  word-wrap: break-word; /* 긴 텍스트가 화면 밖으로 나가지 않도록 처리 */
+  text-align: center;
+}
+
+/* 반응형 처리 */
+.full-content div {
+  font-size: 2.5vw; /* 화면 크기에 따라 글자 크기 조정 */
+  line-height: 1.6;
+}
+
+.full-content img {
+  max-width: 100vw; /* 화면에 맞게 이미지 크기 조정 */
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+.ssave-button,
+.share-button {
+  width: 7rem;
+  height: 3rem;
+  background: #6b503f;
+  border-radius: 10px;
+  text-align: center;
+  color: #fdfdfd;
+}

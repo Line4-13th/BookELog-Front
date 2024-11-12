@@ -1,0 +1,79 @@
+// .searchButton {
+//   display: flex;
+//   // justify-content: center;
+//   align-items: center;
+//   width: 330.62px;
+//   padding: 10px;
+//   border-radius: 10px;
+//   background: rgba(255, 255, 255, 0.15);
+//   flex-shrink: 0;
+//   font-family: Poppins, sans-serif;
+//   font-size: 16px;
+//   font-weight: 400;
+//   line-height: 22px;
+//   letter-spacing: -0.408px;
+//   img {
+//     position: relative;
+//   }
+
+//   .searchInput {
+//     /* 기본 스타일 초기화 */
+//     border: none;
+//     outline: none;
+//     background: none;
+//     padding: 0;
+//     margin: 0;
+//     box-shadow: none;
+//     appearance: none;
+//     color: #d0caca;
+//     width: 250px;
+//     margin-left: 10px;
+
+//     &::placeholder {
+//       color: #888888; /* placeholder 색상 */
+//       opacity: 1; /* 투명도 조정 */
+//     }
+//   }
+// }
+
+//
+
+.searchButton {
+  display: flex;
+  align-items: center;
+  width: 80vw;
+  height: 1rem;
+  // max-width: 330px; /* 최대 너비 설정 */
+  padding: 1rem; /* rem 단위로 패딩 */
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+  font-family: Poppins, sans-serif;
+  font-size: 1rem; /* rem 단위로 글꼴 크기 */
+  font-weight: 400;
+  line-height: 1.375; /* line-height를 rem 단위로 */
+  letter-spacing: -0.02em; /* em 단위로 조정 */
+  margin-bottom: 1.5rem;
+
+  img {
+    position: relative;
+  }
+
+  .searchInput {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    appearance: none;
+    color: #d0caca;
+    width: 60%; /* 부모 요소에 대한 상대적인 너비 */
+    margin-left: 0.5rem; /* rem 단위로 여백 설정 */
+
+    &::placeholder {
+      color: #888888; /* placeholder 색상 */
+      opacity: 1; /* 투명도 조정 */
+    }
+  }
+}
