@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RecordLogin from './RecordLogIn';
 import RecordToggle from './RecordToggle';
@@ -8,6 +8,8 @@ import './record.scss';
 function Record() {
   const [isLoggedIn, setIsLoggedIn] = useState(true)
   const navigate = useNavigate();
+
+  // useEffect()
 
   return (
     <div className="record-container">

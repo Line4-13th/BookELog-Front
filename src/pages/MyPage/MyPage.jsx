@@ -1,5 +1,5 @@
 // src/pages/Home/MyPage.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './MyPage.scss';
 
@@ -174,21 +174,3 @@ const MyPage = () => {
 };
 
 export default MyPage;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
