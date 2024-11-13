@@ -1,30 +1,37 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // useNavigate import 추가
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './recordtoggle.scss';
 import Calendar from 'react-calendar';
 import FolderView from './FolderView';
 import './Calendar.css';
-// import axios from 'axios';
+import axios from 'axios';
 import add from '../../assets/add.svg';
+import API_URL from '../../../API_URL';
 
 function RecordToggle() {
   const [active, setActive] = useState('calendar');
   const [value, onChange] = useState(new Date());
+  const [activeMonth, setActiveMonth] = useState(new Date());
+  const [markedDates, setMarkedDates] = useState([]);
   const navigate = useNavigate(); // useNavigate 초기화
-  // const [markedDates, setMarkedDates] = useState([]);
 
-  // useEffect(() => {
-  //   axios.get(`{API_URL}/reading_log/reading_logs/`)
-  //     .then(response => {
-  //       const dates = response.data.map(item => new Date(item.date));
-  //       setMarkedDates(dates);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching marked dates:', error);
-  //     });
-  // }, []);
+  //! 달력 점 가져오기
+  useEffect(() => {
+    const monthNum = activeMonth.getMonth() + 1;
+    const yearNum = activeMonth.getFullYear();
 
-  const markedDates = [new Date('2024-11-08')];
+    console.log(``)
+
+    axios.get(`${API_URL}/reading_log/reading_logs/dots/?month=${yearNum}-${monthNum}`)
+      .then(response => {
+        const dates = response.data.dots.map(dateString => new Date(dateString));
+        setMarkedDates(dates);
+      })
+      .catch(error => {
+        console.error('달력 점 가져오기 오류:', error);
+      });
+  }, [activeMonth]);
+  
 
   const tileContent = ({ date, view }) => {
     if (view === 'month' && markedDates.some(d => d.toDateString() === date.toDateString())) {
@@ -40,6 +47,12 @@ function RecordToggle() {
   const handleAddButtonClick = () => {
     navigate('/booksearch'); // 책 검색 페이지로 이동
   };
+
+  const handleActiveStartDateChange = ({ activeStartDate }) => {
+    setActiveMonth(activeStartDate);
+    console.log(activeMonth);
+  };
+
 
   return (
     <div className="record-toggle-container">
@@ -67,6 +80,7 @@ function RecordToggle() {
             prev2Label={null}
             next2Label={null}
             tileContent={tileContent}
+            onActiveStartDateChange={handleActiveStartDateChange}
           />
         )}
         {active === 'file' && (

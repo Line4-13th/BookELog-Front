@@ -1,6 +1,10 @@
 // import { useState } from 'react'
 import './recommend.scss';
-import ex from '../../assets/recommend_ex.svg';
+import ex1 from '../../assets/recommend/ex1.svg';
+import ex2 from '../../assets/recommend/ex2.svg';
+import ex3 from '../../assets/recommend/ex3.svg';
+import ex5 from '../../assets/recommend/ex5.svg';
+import ex6 from '../../assets/recommend/ex6.svg';
 
 function Recommend() {
 
@@ -9,19 +13,23 @@ function Recommend() {
       <h2 className="recommend-title">오늘날, 떠오르는<br/>신인 작가들의 단편소설 추천</h2>
       <div className="recommend-items">
         <img
-          src={ex}
+          src={ex1}
           alt="Recommend Item Examples"
         />
         <img
-          src={ex}
+          src={ex2}
           alt="Recommend Item Examples"
         />
         <img
-          src={ex}
+          src={ex3}
           alt="Recommend Item Examples"
         />
         <img
-          src={ex}
+          src={ex5}
+          alt="Recommend Item Examples"
+        />
+        <img
+          src={ex6}
           alt="Recommend Item Examples"
         />
       </div>
