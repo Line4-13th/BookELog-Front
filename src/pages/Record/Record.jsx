@@ -6,10 +6,14 @@ import logo from '../../../public/book-e-log-black.svg';
 import './record.scss';
 
 function Record() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const navigate = useNavigate();
 
-  // useEffect()
+  useEffect(()=> {
+    if (localStorage.getItem('userData')) {
+      setIsLoggedIn(true);
+    }
+  }, [])
 
   return (
     <div className="record-container">
