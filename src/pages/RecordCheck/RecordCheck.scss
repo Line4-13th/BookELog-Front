@@ -1,15 +1,23 @@
+.rrecord-back {
+  background: var(--back2, #fff9e7);
+}
+
 .rrecord-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+  // justify-content: ;
+  width: 100vw;
+  height: 100vh;
 }
 
 .record-check-content {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 90%;
 }
 
 .content-row {
@@ -56,4 +64,8 @@
 .content-item p:hover {
   cursor: pointer; /* 텍스트 클릭 가능하도록 설정 */
   color: #444; /* 텍스트가 클릭될 때 색상 변경 */
+}
+
+h3 {
+  width: 100%;
 }

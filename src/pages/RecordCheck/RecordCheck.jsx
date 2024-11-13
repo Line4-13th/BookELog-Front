@@ -1,6 +1,7 @@
 // import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./RecordCheck.scss";
+import HeaderToggle from "./HeaderToggle";
 
 function RecordCheck() {
   const location = useLocation(); // 전달된 state 가져오기
@@ -38,34 +39,32 @@ function RecordCheck() {
   };
 
   return (
-    <div className="rrecord-container">
-      <header className="book-detail-header">
-        <button className="back-button" onClick={handleBack}>
-          ←
-        </button>
-        <div className="folder-dropdown">
-          <p>{bookTitle}</p> {/* 전달된 제목 표시 */}
-        </div>
-      </header>
+    <div className="rrecord-back">
+      <div className="rrecord-container">
+        <header className="book-detail-header">
+          <HeaderToggle />
+        </header>
 
-      <div className="record-check-content">
-        <div className="content-row">
-          {imageUrls.length > 0 ? (
-            imageUrls.map((url, index) => (
-              <div className="content-item" key={index}>
-                <img
-                  src={url || defaultImage} // 이미지가 없으면 기본 대체 이미지 사용
-                  alt={`Content ${index}`}
-                  onClick={() => handleImageClick(url)} // 클릭 시 해당 이미지의 URL 전달
-                />
+        <div className="record-check-content">
+          <div className="content-row">
+            {imageUrls.length > 0 ? (
+              imageUrls.map((url, index) => (
+                <div className="content-item" key={index}>
+                  <img
+                    src={url || defaultImage} // 이미지가 없으면 기본 대체 이미지 사용
+                    alt={`Content ${index}`}
+                    onClick={() => handleImageClick(url)} // 클릭 시 해당 이미지의 URL 전달
+                  />
+                  {/* 이미지 아래에 책 제목 표시 */}
+                </div>
+              ))
+            ) : (
+              <div className="content-item" onClick={handleNoImageClick}>
+                <p>이미지가 없습니다</p>{" "}
+                {/* 이미지가 없으면 텍스트로 대체, 클릭 시 이동 */}
               </div>
-            ))
-          ) : (
-            <div className="content-item" onClick={handleNoImageClick}>
-              <p>이미지가 없습니다</p>{" "}
-              {/* 이미지가 없으면 텍스트로 대체, 클릭 시 이동 */}
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>

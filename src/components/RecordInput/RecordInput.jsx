@@ -27,7 +27,7 @@ const RecordInput = ({ onContentChange }) => {
     <ReactQuill
       theme="snow"
       modules={modules}
-      style={{ height: "300px", width: "100%" }}
+      style={{ height: "15rem", width: "100%" }}
       onChange={onContentChange} // 내용 변경 시 상위로 전달
     />
   );

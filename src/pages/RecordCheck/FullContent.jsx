@@ -66,7 +66,17 @@ function FullContent() {
           <p>{bookTitle}</p> {/* 전달된 제목 표시 */}
         </div>
       </header>
-
+      <div className="buttons-container">
+        <button onClick={handleSaveImage} className="ssave-button">
+          이미지로 저장
+        </button>
+        <button onClick={handleSavePDF} className="ssave-button">
+          PDF로 저장
+        </button>
+        <button onClick={handleShare} className="share-button">
+          공유
+        </button>
+      </div>
       <div className="full-content" id="content-to-pdf">
         {" "}
         {/* PDF 저장할 콘텐츠 */}
@@ -82,18 +92,6 @@ function FullContent() {
           dangerouslySetInnerHTML={{ __html: recordContent }}
         />{" "}
         {/* 이미지로 저장할 콘텐츠 */}
-      </div>
-
-      <div className="buttons-container">
-        <button onClick={handleSaveImage} className="ssave-button">
-          이미지로 저장
-        </button>
-        <button onClick={handleSavePDF} className="ssave-button">
-          PDF로 저장
-        </button>
-        <button onClick={handleShare} className="share-button">
-          공유
-        </button>
       </div>
     </div>
   );
