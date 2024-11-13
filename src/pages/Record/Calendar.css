@@ -75,6 +75,7 @@
   height: 6.5vh;
   margin-bottom: 0.5em;
   font-size: 1.3em;
+  text-align: center;
   
   /* border: 1px solid black; */
   box-sizing: border-box;
@@ -185,6 +186,7 @@ abbr[title] {
 
 .react-calendar__tile--now {
   font-weight: bold;
+  border-radius: 10px;
 }
 
 .react-calendar__tile--now:enabled:hover,
@@ -203,7 +205,7 @@ abbr[title] {
 .react-calendar__tile--hasActive:enabled:hover,
 .react-calendar__tile--hasActive:enabled:focus {
   background: #3f1f089a;
-  border-radius: 50%;
+  border-radius: 50% !important; 
 }
 
 .react-calendar__tile--active {

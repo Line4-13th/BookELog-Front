@@ -41,6 +41,8 @@
     width: 49%;
 
     transition: background-color 0.2s, height 0.2s, margin 0.2s, box-shadow 0.2s;
+    margin-top: 0;
+    text-align: center;
   }
 
   .active {
@@ -72,7 +74,7 @@
   background-color: transparent;
 
   position: absolute;
-  bottom: 5%;
+  bottom: 9%;
 }
 
 .add-record-image {

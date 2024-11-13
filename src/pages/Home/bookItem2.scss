@@ -1,15 +1,15 @@
-$book-item2-box-width: 67vw;
+$book-item2-box-width: 250px;
 
 .book-item2-container {
   color: black;
   font-weight: 300;
-  font-size: 2vh;
+  font-size: 13px;
 
   position: relative;
 
   // border: 1px solid lightcoral;
 
-  height: 30vh;
+  height: 200px;
   margin-bottom: 3vh;
 }
 
@@ -20,7 +20,6 @@ $book-item2-box-width: 67vw;
   background: linear-gradient(90deg, #FFE9D3, #F8B268);
 
   width: $book-item2-box-width;
-  height: 55%;
   position: relative;
   top: 0;
   left: 0;
@@ -30,31 +29,53 @@ $book-item2-box-width: 67vw;
     // border: 1px solid blue;
     color: #665048;
     margin: 0.5vh;
-    margin-top: 0;
+    margin-top: 3px;
   }
   .book-item2-desc {
     // border: 1px solid green;
     margin: 0;
     white-space: pre-line;
+    margin-bottom: 5px;
   }
 }
 
 .book-item2-book {
   position: relative;
-  right: -$book-item2-box-width + 5vw;
   top: -10vh;
   
   background-color: #FFCFC4;
   
   z-index: 999;
-  width: 25vw;
-  height: 19.9vh;
+  width: 105px;
+  height: 150px;
   border-radius: 0 10px 10px 0;
 
   .book-item2-image {
-    width: 24vw;
-
     position: relative;
-    left: 1.5vw;
+    left: 5px;
+  }
+}
+
+@media (max-width: 380px) {
+  .book-item2-book {
+    right: -$book-item2-box-width + 17px;
+    width: 90px;
+    height: 130px;
+  }
+  .book-item2-image {
+    width: 90px;
+    height: 130px;
+  }
+}
+
+@media (min-width: 381px) {
+  .book-item2-book {
+    right: -$book-item2-box-width;
+    width: 105px;
+    height: 150px;
+  }
+  .book-item2-image {
+    width: 105px;
+    height: 150px;
   }
 }

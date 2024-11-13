@@ -26,6 +26,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  position: absolute;
+  top: 0;
 }
 
 .home-header {
@@ -61,4 +64,11 @@
     font-size: 15px;
     padding-left: 3px;
   }
+}
+
+.home-section {
+  width: 100vw;
+  
+  position: absolute;
+  top: 20%;
 }

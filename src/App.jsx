@@ -19,11 +19,11 @@ import Question from "./components/ReviewPage/Question";
 import AnswerList from "./components/ReviewPage/AnswerList";
 import RecordCheck from "./pages/RecordCheck/RecordCheck";
 import FullContent from "./pages/RecordCheck/FullContent";
+import CurationItem from "./pages/Home/CurationItem";
 
 function App() {
   return (
     <Router>
-      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/category" element={<Category />} />
@@ -36,6 +36,7 @@ function App() {
         {/* RecordCheck 페이지 */}
         {/* 답변 리스트 페이지 */}
         <Route path="/curation" element={<Curation />} />
+        <Route path="/curationItem" element={<CurationItem />} />
         <Route path="/booksearch" element={<BookSearch />} />
         <Route path="/book-detail" element={<BookDetailPage />} />
         <Route path="/record" element={<Record />} />
@@ -44,6 +45,7 @@ function App() {
         <Route path="/review" element={<MyReviewPage />} />
         <Route path="/qna" element={<QnAPage />} />
       </Routes>
+      <NavBar />
     </Router>
   );
 }

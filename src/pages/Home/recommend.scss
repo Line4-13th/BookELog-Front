@@ -1,13 +1,15 @@
 .recommend-container {
-  width: 100%;
+  width: 100vw;
   // border: 1px solid red;
-  margin-left: 10px;
+  margin-left: 0;
 
   .recommend-title {
     color: white;
     font-size: 22px;
-    margin: 1vh 2vh;
+    margin: 0 2vh;
     // border: 1px solid green;
+    width: 90%;
+    margin-left: 20px;
   }
 
   .recommend-items {
@@ -34,8 +36,16 @@
   margin-right: -30px;
 }
 
-@media (max-width: 376px) {
+@media (min-height: 0) {
   .recommend-container {
     top: 22%;
+    margin-top: 2.5vh;
+  }
+}
+
+@media (min-height: 745px) {
+  .recommend-container {
+    top: 22%;
+    margin-top: 0;
   }
 }

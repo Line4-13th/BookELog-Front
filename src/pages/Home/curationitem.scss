@@ -46,7 +46,7 @@ $back-button-height: 2vh;
 
   .curation-item-title {
     color: white;
-    font-size: 3.5vh;
+    font-size: 24px;
     margin-left: 3vh;
     line-height: 4vh;
 
@@ -57,9 +57,28 @@ $back-button-height: 2vh;
 
 .curation-item-articles {
   position: relative;
-  top: $back-button-height + $picture-height + 10vh;
+  top: $back-button-height + $picture-height + 6vh;
 
-  margin: 0 4vh 4vh 4vh;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-  border: 1px solid transparent;
+  width: 80vw;
 }
+
+.curation-item-articles:last-child {
+  padding-bottom: 9vh;
+}
+
+@media (max-height: 670px) {
+  .curation-item-articles:last-child {
+    padding-bottom: 13vh;
+  }
+}
+
+// @media (max-width: 370px) {
+//   .curation-item-articles {
+//     margin: 0 4vh 4vh 1.5vh;
+//   }
+// }
