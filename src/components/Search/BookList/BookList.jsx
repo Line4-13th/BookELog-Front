@@ -1,95 +1,64 @@
 import { useEffect, useState } from "react";
 import "./Booklist.scss";
 import { useNavigate } from "react-router-dom";
-// import UpBar from "../../UpBar/UpBar";
+import axios from "axios";
+import BASE_URL from "../../../../API_URL"; // ✨ BASE_URL import
 
 const BookList = ({ category }) => {
   const [books, setBooks] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // 목업 데이터
-  const mockBooks = [
-    {
-      book_id: 1,
-      bookcover: "https://via.placeholder.com/100",
-      title: "Mock Book 1",
-      introduction: "This is a mock introduction for book 1.",
-    },
-    {
-      book_id: 2,
-      bookcover: "https://via.placeholder.com/100",
-      title: "Mock Book 2",
-      introduction: "This is a mock introduction for book 2.",
-    },
-    {
-      book_id: 3,
-      bookcover: "https://via.placeholder.com/100",
-      title: "Mock Book 3",
-      introduction: "This is a mock introduction for book 3.",
-    },
-    {
-      book_id: 4,
-      bookcover: "https://via.placeholder.com/100",
-      title: "Mock Book 3",
-      introduction: "This is a mock introduction for book 3.",
-    },
-    {
-      book_id: 5,
-      bookcover: "https://via.placeholder.com/100",
-      title: "Mock Book 3",
-      introduction: "This is a mock introduction for book 3.",
-    },
-    {
-      book_id: 6,
-      bookcover: "https://via.placeholder.com/100",
-      title: "Mock Book 3",
-      introduction: "This is a mock introduction for book 3.",
-    },
-    {
-      book_id: 7,
-      bookcover: "https://via.placeholder.com/100",
-      title: "Mock Book 3",
-      introduction: "This is a mock introduction for book 3.",
-    },
-    {
-      book_id: 8,
-      bookcover: "https://via.placeholder.com/100",
-      title: "Mock Book 3",
-      introduction: "This is a mock introduction for book 3.",
-    },
-    {
-      book_id: 9,
-      bookcover: "https://via.placeholder.com/100",
-      title: "Mock Book 3",
-      introduction: "This is a mock introduction for book 3.",
-    },
-    {
-      book_id: 10,
-      bookcover: "https://via.placeholder.com/100",
-      title: "Mock Book 3",
-      introduction: "This is a mock introduction for book 3.",
-    },
-  ];
-
   useEffect(() => {
-    // API 대신 목업 데이터를 사용
-    setBooks(mockBooks);
+    const fetchBooks = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `${BASE_URL}/api/books/?category=${category}`
+        );
+
+        console.log("API Response:", response.data); // ✨ 응답 데이터 확인
+
+        // 응답이 배열인지 확인
+        if (response.data && Array.isArray(response.data)) {
+          setBooks(response.data);
+        } else {
+          console.error("Unexpected data format:", response.data);
+          setBooks([]); // 예상치 못한 데이터일 경우 빈 배열로 설정
+        }
+
+        setError(null);
+      } catch (err) {
+        console.error("책 데이터를 불러오는 중 오류 발생:", err);
+        setError("서버와의 연결에 문제가 발생했습니다.");
+        setBooks([]); // 오류 발생 시 빈 배열로 설정
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBooks();
   }, [category]);
 
   const handleBookClick = (bookId) => {
     navigate(`/book/${bookId}`);
   };
+
   return (
     <div>
-      {/* <UpBar /> */}
       <div className="booklist-container">
-        {books.length > 0 ? (
+        {loading ? (
+          <p>로딩 중...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : Array.isArray(books) && books.length > 0 ? ( // 배열 확인 추가
           books.map((book) => (
-            <div className="book-item" key={book.book_id}>
+            <div className="book-item" key={book.id}>
               <img
-                src={book.bookcover}
+                src={book.cover_image}
                 alt={book.title}
-                onClick={() => handleBookClick(book.book_id)}
+                onClick={() => handleBookClick(book.id)}
               />
               <div className="introductionmark">
                 <p>{book.introduction}</p>
@@ -97,7 +66,7 @@ const BookList = ({ category }) => {
             </div>
           ))
         ) : (
-          <p>책 목록이 없습니다.</p>
+          <p>선택한 카테고리에 해당하는 책이 없습니다.</p>
         )}
       </div>
     </div>

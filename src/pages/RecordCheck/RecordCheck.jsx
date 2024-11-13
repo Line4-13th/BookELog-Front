@@ -2,6 +2,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import "./RecordCheck.scss";
 import HeaderToggle from "./HeaderToggle";
+// import HeaderToggle from "./HeaderToggle";
 
 function RecordCheck() {
   const location = useLocation(); // 전달된 state 가져오기
