@@ -1,7 +1,9 @@
 // import React from 'react';
 import './recordlogin.scss';
+import { useNavigate } from 'react-router-dom';
 
 function RecordLogin() {
+  const navigate = useNavigate();
 
   return (
     <div className="record-login-container">
@@ -9,9 +11,8 @@ function RecordLogin() {
         로그인 후,<br />해당 서비스를 이용해 주세요.
       </p>
       <div className="record-login-buttons">
-        <button className="record-login-button">로그인</button>
-        <button className="record-signup-button">회원가입</button>
-        {/* 네비게이션 추가 필요! */}
+        <button className="record-login-button" onClick={() => navigate('/myPage')}>로그인</button>
+        <button className="record-signup-button" onClick={() => navigate('/myPage')}>회원가입</button>
       </div>
     </div>
   )
