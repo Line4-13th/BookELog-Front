@@ -1,5 +1,5 @@
 // src/pages/Home/MyPage.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Login from './Login';
 import SignUp from './SignUp';
@@ -51,24 +51,4 @@ const MyPage = () => {
     </div>
   );
 };
-
 export default MyPage;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
