@@ -39,6 +39,36 @@ const BookList = ({ category }) => {
       title: "Mock Book 3",
       introduction: "This is a mock introduction for book 3.",
     },
+    {
+      book_id: 6,
+      bookcover: "https://via.placeholder.com/100",
+      title: "Mock Book 3",
+      introduction: "This is a mock introduction for book 3.",
+    },
+    {
+      book_id: 7,
+      bookcover: "https://via.placeholder.com/100",
+      title: "Mock Book 3",
+      introduction: "This is a mock introduction for book 3.",
+    },
+    {
+      book_id: 8,
+      bookcover: "https://via.placeholder.com/100",
+      title: "Mock Book 3",
+      introduction: "This is a mock introduction for book 3.",
+    },
+    {
+      book_id: 9,
+      bookcover: "https://via.placeholder.com/100",
+      title: "Mock Book 3",
+      introduction: "This is a mock introduction for book 3.",
+    },
+    {
+      book_id: 10,
+      bookcover: "https://via.placeholder.com/100",
+      title: "Mock Book 3",
+      introduction: "This is a mock introduction for book 3.",
+    },
   ];
 
   useEffect(() => {
