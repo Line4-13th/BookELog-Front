@@ -13,6 +13,7 @@ function RecordToggle() {
   const [value, onChange] = useState(new Date());
   const [activeMonth, setActiveMonth] = useState(new Date());
   const [markedDates, setMarkedDates] = useState([]);
+  const [calendarHeight, setCalendarHeight] = useState('96%');
   const navigate = useNavigate(); // useNavigate 초기화
 
   //! 달력 점 가져오기
@@ -32,6 +33,9 @@ function RecordToggle() {
       });
   }, [activeMonth]);
   
+  useEffect(() => {
+    calculateCalendarHeight(activeMonth);
+  }, [activeMonth]);
 
   const tileContent = ({ date, view }) => {
     if (view === 'month' && markedDates.some(d => d.toDateString() === date.toDateString())) {
@@ -53,6 +57,14 @@ function RecordToggle() {
     console.log(activeMonth);
   };
 
+  const calculateCalendarHeight = (month) => {
+    const startDay = new Date(month.getFullYear(), month.getMonth(), 1).getDay();
+    const daysInMonth = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate();
+    const weeks = Math.ceil((startDay + daysInMonth) / 7);
+
+    const heightPerWeek = 9;
+    setCalendarHeight(`${weeks * heightPerWeek}vh`);
+  };
 
   return (
     <div className="record-toggle-container">
@@ -81,6 +93,7 @@ function RecordToggle() {
             next2Label={null}
             tileContent={tileContent}
             onActiveStartDateChange={handleActiveStartDateChange}
+            style={{ height: calendarHeight }}
           />
         )}
         {active === 'file' && (

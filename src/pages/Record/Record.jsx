@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RecordLogin from './RecordLogIn';
 import RecordToggle from './RecordToggle';
@@ -6,8 +6,14 @@ import logo from '../../../public/book-e-log-black.svg';
 import './record.scss';
 
 function Record() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const navigate = useNavigate();
+
+  useEffect(()=> {
+    if (localStorage.getItem('userData')) {
+      setIsLoggedIn(true);
+    }
+  }, [])
 
   return (
     <div className="record-container">
