@@ -20,6 +20,7 @@ import AnswerList from "./components/ReviewPage/AnswerList";
 import RecordCheck from "./pages/RecordCheck/RecordCheck";
 import FullContent from "./pages/RecordCheck/FullContent";
 import CurationItem from "./pages/Home/CurationItem";
+import SearchList from "./components/Search/SearchList";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/answers/:id" element={<AnswerList />} />{" "}
         <Route path="/recordcheck" element={<RecordCheck />} />
         <Route path="/fullcontent" element={<FullContent />} />
+        <Route path="/searchlist" element={<SearchList />} />
         {/* RecordCheck 페이지 */}
         {/* 답변 리스트 페이지 */}
         <Route path="/curation" element={<Curation />} />
