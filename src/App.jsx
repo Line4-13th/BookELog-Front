@@ -20,6 +20,8 @@ import AnswerList from "./components/ReviewPage/AnswerList";
 import RecordCheck from "./pages/RecordCheck/RecordCheck";
 import FullContent from "./pages/RecordCheck/FullContent";
 import CurationItem from "./pages/Home/CurationItem";
+import Login from "./pages/MyPage/Login";
+import SignUp from "./pages/MyPage/SignUp";
 
 function App() {
   return (
@@ -41,6 +43,8 @@ function App() {
         <Route path="/book-detail" element={<BookDetailPage />} />
         <Route path="/record" element={<Record />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/review" element={<MyReviewPage />} />
         <Route path="/qna" element={<QnAPage />} />

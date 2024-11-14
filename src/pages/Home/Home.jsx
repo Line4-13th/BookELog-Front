@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./home.scss";
@@ -13,6 +13,13 @@ function Home() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('userData')) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -44,7 +51,9 @@ function Home() {
           <img
             src={profile}
             alt="Profile Page"
-            onClick={() => navigate('/mypage')}
+            onClick={() => {
+              isLoggedIn ? navigate('/mypage') : navigate('/login')
+            }}
           />
         </div>
         <form className="home-search"  onSubmit={handleSearchSubmit}>
