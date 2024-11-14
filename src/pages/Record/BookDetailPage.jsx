@@ -5,6 +5,8 @@ import "react-calendar/dist/Calendar.css";
 import "./bookdetailpage.scss";
 import RecordInput from "../../components/RecordInput/RecordInput";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import BASE_URL from "../../../API_URL";
 
 function BookDetailPage() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -12,8 +14,8 @@ function BookDetailPage() {
   const [showRatingModal, setShowRatingModal] = useState(false);
   const [rating, setRating] = useState(4);
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [startDate, setStartDate] = useState("October 26, 2024");
-  const [endDate, setEndDate] = useState("October 28, 2024");
+  const [startDate, setStartDate] = useState("2024-10-26");
+  const [endDate, setEndDate] = useState("2024-10-28");
   const [dateType, setDateType] = useState("start");
 
   const [recordContent, setRecordContent] = useState(""); // RecordInput 내용 상태 관리
@@ -30,10 +32,11 @@ function BookDetailPage() {
   };
 
   const handleDateChange = (date) => {
+    const formattedDate = date.toISOString().split("T")[0];
     if (dateType === "start") {
-      setStartDate(date.toDateString());
+      setStartDate(formattedDate);
     } else {
-      setEndDate(date.toDateString());
+      setEndDate(formattedDate);
     }
     setShowDatePicker(false);
   };
@@ -43,19 +46,41 @@ function BookDetailPage() {
     setShowDatePicker(true);
   };
 
-  const handleSave = () => {
-    console.log("저장된 내용:", recordContent); // 제출 데이터 확인
-    // API 요청 또는 저장 로직을 추가할 수 있습니다.
-    alert("저장되었습니다!");
+  const handleSave = async () => {
+    const payload = {
+      book: 1, // 책 ID (하드코딩 예시)
+      folder: 3, // 선택된 폴더 ID
+      rating: rating,
+      start_date: startDate,
+      completion_date: endDate,
+      notes: recordContent, // Quill 입력된 내용
+    };
 
-    // 저장 후 RecordCheck 페이지로 네비게이트
-    navigate("/recordcheck", { state: { recordContent } });
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/reading_log/user_reading_logs/`,
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("기록 저장 성공:", response.data);
+      alert("기록이 성공적으로 저장되었습니다!");
+      navigate("/recordcheck", { state: { recordContent } });
+    } catch (error) {
+      console.error("기록 저장 실패:", error);
+      alert("기록 저장에 실패했습니다.");
+    }
   };
 
   return (
     <div className="book-detail-container">
       <header className="book-detail-header">
-        <button className="back-button">←</button>
+        <button className="back-button" onClick={() => navigate(-1)}>
+          ←
+        </button>
         <div className="folder-dropdown">
           <p onClick={() => setShowDropdown(!showDropdown)}>
             {selectedFolder} ⬇
@@ -119,8 +144,7 @@ function BookDetailPage() {
       )}
 
       <div className="recordinputcomponent">
-        <RecordInput onContentChange={(content) => setRecordContent(content)} />{" "}
-        {/* 내용 전달 */}
+        <RecordInput onContentChange={(content) => setRecordContent(content)} />
       </div>
     </div>
   );

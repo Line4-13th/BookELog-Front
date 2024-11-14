@@ -1,5 +1,13 @@
 .rrecord-back {
   background: var(--back2, #fff9e7);
+  display: flex;
+
+  .bbackbutton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer; // 클릭 가능 표시
+  }
 }
 
 .rrecord-container {
@@ -7,7 +15,6 @@
   flex-direction: column;
   align-items: center;
   padding: 2rem;
-  // justify-content: ;
   width: 100vw;
   height: 100vh;
 }
@@ -18,12 +25,13 @@
   justify-content: center;
   align-items: center;
   width: 90%;
+  margin-top: 40px;
 }
 
 .content-row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 한 줄에 두 개씩 배치 */
-  gap: 2rem; /* 아이템 사이의 간격을 설정 */
+  grid-template-columns: repeat(2, 1fr); // 한 줄에 두 개씩 배치
+  gap: 2rem; // 아이템 사이 간격
   width: 100%;
   box-sizing: border-box;
 }
@@ -33,39 +41,34 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  overflow: hidden; /* 이미지가 정사각형을 벗어나지 않도록 */
-  aspect-ratio: 1 / 1; /* 정사각형 비율을 유지 */
-  border-radius: 10px;
-  background-color: #f0f0f0; /* 이미지가 없을 때 배경색 설정 */
-  justify-content: center; /* 텍스트를 세로로 중앙 정렬 */
-  text-align: center; /* 텍스트를 가로로 중앙 정렬 */
-}
-
-.content-item img {
-  object-fit: cover; /* 이미지를 정사각형 비율에 맞게 크기 조정 */
   width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  aspect-ratio: 1 / 1; /* 정사각형 비율을 유지 */
-}
+  margin-bottom: 20px;
 
-.content-item h3 {
-  font-size: 2rem;
-  text-align: center;
-  margin-top: 1rem;
-}
+  .image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1; // 정사각형 비율 유지
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #f0f0f0; // 이미지 없는 경우 배경
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.content-item p {
-  font-size: 1rem; /* "이미지가 없습니다" 텍스트 크기 설정 */
-  color: #888; /* 텍스트 색상 설정 */
-  margin-top: 1rem;
-}
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // 정사각형 비율 유지
+  }
 
-.content-item p:hover {
-  cursor: pointer; /* 텍스트 클릭 가능하도록 설정 */
-  color: #444; /* 텍스트가 클릭될 때 색상 변경 */
-}
-
-h3 {
-  width: 100%;
+  .book-title {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 90%;
+    text-align: center;
+  }
 }

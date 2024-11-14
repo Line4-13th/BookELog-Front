@@ -10,13 +10,24 @@
   background: var(--back2, #fff9e7);
 }
 
+.bbackbutton {
+  position: absolute; /* 부모 기준 위치 조정 */
+  left: 20px; /* 왼쪽에서 10px 간격 */
+  top: 20px; /* 상단에서 10px 간격 */
+  cursor: pointer; /* 클릭 가능하도록 설정 */
+  width: 45px; /* 버튼 크기 조정 */
+  height: auto; /* 가로 비율 유지 */
+  margin-bottom: 10px;
+}
+
 .full-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 90%;
   margin-top: 1rem;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .book-detail-header {

@@ -1,8 +1,7 @@
 // import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./RecordCheck.scss";
-import HeaderToggle from "./HeaderToggle";
-// import HeaderToggle from "./HeaderToggle";
+import BackButton from "../../assets/backbutton_brown.svg";
 
 function RecordCheck() {
   const location = useLocation(); // 전달된 state 가져오기
@@ -33,7 +32,6 @@ function RecordCheck() {
 
   // 이미지가 없을 경우에도 클릭 시 이동할 수 있게 하도록 처리
   const handleNoImageClick = () => {
-    // 이미지가 없더라도 이동하도록 처리
     navigate("/fullcontent", {
       state: { bookTitle, recordContent, imageUrl: defaultImage },
     });
@@ -42,21 +40,21 @@ function RecordCheck() {
   return (
     <div className="rrecord-back">
       <div className="rrecord-container">
-        <header className="book-detail-header">
-          <HeaderToggle />
-        </header>
-
+        <img className="bbackbutton" src={BackButton} onClick={handleBack} />
         <div className="record-check-content">
           <div className="content-row">
             {imageUrls.length > 0 ? (
               imageUrls.map((url, index) => (
                 <div className="content-item" key={index}>
-                  <img
-                    src={url || defaultImage} // 이미지가 없으면 기본 대체 이미지 사용
-                    alt={`Content ${index}`}
-                    onClick={() => handleImageClick(url)} // 클릭 시 해당 이미지의 URL 전달
-                  />
-                  {/* 이미지 아래에 책 제목 표시 */}
+                  <div className="image-wrapper">
+                    <img
+                      src={url || defaultImage} // 이미지가 없으면 기본 대체 이미지 사용
+                      alt={`Content ${index}`}
+                      onClick={() => handleImageClick(url)} // 클릭 시 해당 이미지의 URL 전달
+                    />
+                  </div>
+                  <p className="book-title">{bookTitle || "제목 없음"}</p>{" "}
+                  {/* 제목 표시 */}
                 </div>
               ))
             ) : (
