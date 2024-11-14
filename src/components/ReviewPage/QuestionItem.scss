@@ -10,12 +10,6 @@
   &.question {
     background: linear-gradient(180deg, #5ec6f5 0%, #007aff 100%);
 
-    .up-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center; /* 수직 정렬 */
-    }
-
     .name {
       color: white;
       font-weight: bold;
@@ -59,4 +53,18 @@
       line-height: 1.5;
     }
   }
+}
+
+.aligntext-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.up-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 수직 정렬 */
+  height: 1rem;
+  border: 1px solid red;
 }

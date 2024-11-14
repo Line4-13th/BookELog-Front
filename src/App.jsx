@@ -29,7 +29,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/category" element={<Category />} />
         <Route path="/category/:category" element={<CategoryDetail />} />
-        <Route path="/book/:id" element={<BookDetail />} />
+        <Route path="/book/:book_id" element={<BookDetail />} />
         <Route path="/" element={<Question />} /> {/* 메인 질문 페이지 */}
         <Route path="/answers/:id" element={<AnswerList />} />{" "}
         <Route path="/recordcheck" element={<RecordCheck />} />

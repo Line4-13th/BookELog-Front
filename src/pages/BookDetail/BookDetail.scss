@@ -106,8 +106,16 @@ button {
 }
 
 .book-cover {
-  width: 5rem;
-  height: 7rem;
+  .book-cover-img {
+    width: 6rem;
+    height: auto;
+    height: 8rem;
+    min-height: 150px;
+    background-color: #f0f0f0;
+    margin-bottom: 0;
+    object-fit: cover;
+    border-radius: 4px;
+  }
 }
 .whole-container {
   height: 100vh; /* 화면 전체 높이를 차지하도록 설정 */
@@ -271,6 +279,10 @@ input {
   width: 100vw; /* 화면 너비 100% */
   padding: 1rem;
   height: 100vh;
+
+  .introduction {
+    font-size: 0.8rem;
+  }
 }
 
 .onesentence-list {
@@ -285,4 +297,8 @@ input {
   gap: 1rem; /* 아이템 간 간격 유지 */
   border: 1px solid red;
   scroll-behavior: smooth; /* 부드러운 스크롤 */
+
+  p {
+    color: #53301f;
+  }
 }

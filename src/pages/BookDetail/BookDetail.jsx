@@ -1,33 +1,54 @@
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom"; // ✨ useParams 추가
 import "./BookDetail.scss";
 import BackButton from "../../assets/BackButton.svg";
-// import magnifyingglass from "../../assets/Search/magnifyingglass.svg";
 import OneSentence from "../../components/ReviewPage/OneSentence";
 import Question from "../../components/ReviewPage/Question";
-import StarRating from "../../components/Star/Star";
+import StarRatings from "../../components/ReviewPage/StarRatings";
+import axios from "axios";
+import BASE_URL from "../../../API_URL"; // API URL
 
 const BookDetail = () => {
   const navigate = useNavigate();
+  const { book_id } = useParams(); // ✨ URL에서 book_id 가져오기
 
+  const [book, setBook] = useState(null); // ✨ 책 상세 정보 상태
+  const [reviews, setReviews] = useState([]); // ✨ 리뷰 상태
+  const [averageRating, setAverageRating] = useState(0); // ✨ 평균 별점
   const [selectedItem, setSelectedItem] = useState(0);
-  const [reviews, setReviews] = useState([
-    { id: 1, userName: "유저1", reviewText: "정말 좋은 책이에요!" },
-    {
-      id: 2,
-      userName: "유저2",
-      reviewText: "생각할 거리를 많이 주는 책입니다.",
-    },
-    { id: 3, userName: "유저3", reviewText: "추천합니다!" },
-  ]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const book = {
-    title: "나는 소망한다 내게 금지된 것을",
-    author: "양귀자",
-    publisher: "쓰다",
-    publicationDate: "2019년 4월",
-    cover: "https://via.placeholder.com/100",
-    rating: 4,
+  useEffect(() => {
+    console.log("Received book id:", book_id);
+    const fetchBookDetail = async () => {
+      try {
+        const response = await axios.get(
+          `${BASE_URL}/api/books/bookdetail/${book_id}/`
+        );
+        setBook(response.data);
+        setReviews(response.data.reviews); // ✨ 리뷰 상태 설정
+        calculateRatingStats(response.data.reviews); // ✨ 별점 통계 계산
+        setError(null);
+      } catch (err) {
+        console.error("책 상세 정보를 불러오는 중 오류 발생:", err);
+        setError("책 상세 정보를 가져오는 데 실패했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBookDetail();
+  }, [book_id]);
+
+  const calculateRatingStats = (reviews) => {
+    if (!reviews || reviews.length === 0) return;
+
+    const totalRatings = reviews.reduce(
+      (sum, review) => sum + review.rating,
+      0
+    );
+    setAverageRating((totalRatings / reviews.length).toFixed(1)); // 평균 별점 계산
   };
 
   const goBack = () => {
@@ -38,6 +59,9 @@ const BookDetail = () => {
     setSelectedItem(index);
   };
 
+  if (loading) return <p>로딩 중...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <div className="whole">
       <button className="back-button" onClick={goBack}>
@@ -45,75 +69,97 @@ const BookDetail = () => {
       </button>
 
       <div className="whole-container">
-        <div className="bookdetail-container">
-          <div className="left">
-            <div className="book-cover">
-              <img src={book.cover} alt={book.title} />
-            </div>
-          </div>
-
-          <div className="whole-right">
-            <div className="right">
-              <div className="book-details">
-                <h2>{`《${book.title}》`}</h2>
-                <p className="author-info">{`${book.author} 저`}</p>
-                <p className="publication-info">{`${book.publisher} | ${book.publicationDate}`}</p>
-                <StarRating />
-                <button className="purchase-button">구매하기</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="segmented-control">
-          <button
-            className={selectedItem === 0 ? "active" : ""}
-            onClick={() => handleSelection(0)}
-          >
-            한 줄 리뷰
-          </button>
-          <button
-            className={selectedItem === 1 ? "active" : ""}
-            onClick={() => handleSelection(1)}
-          >
-            책 소개
-          </button>
-          <button
-            className={selectedItem === 2 ? "active" : ""}
-            onClick={() => handleSelection(2)}
-          >
-            Q&A
-          </button>
-        </div>
-        <div className="content">
-          {selectedItem === 0 && (
-            <div>
-              <div className="overay">
-                <input
-                  className="review"
-                  placeholder="당신의 한 줄 리뷰를 남겨주세요!"
-                ></input>
-              </div>
-              <div className="onesentence-list">
-                {reviews.map((review) => (
-                  <OneSentence
-                    className="onesentence"
-                    key={review.id}
-                    userName={review.userName}
-                    reviewText={review.reviewText}
+        {book && (
+          <>
+            <div className="bookdetail-container">
+              <div className="left">
+                <div className="book-cover">
+                  <img
+                    className="book-cover-img"
+                    src={book.cover_image}
+                    alt={book.title}
                   />
-                ))}
+                </div>
+              </div>
+
+              <div className="whole-right">
+                <div className="right">
+                  <div className="book-details">
+                    <h2>{`《${book.title}》`}</h2>
+                    <p className="author-info">{`${book.author}`}</p>
+                    <p className="publication-info">{`${book.publisher} | ${book.date}`}</p>
+                    <StarRatings rating={averageRating} />{" "}
+                    {/* 평균 별점 표시 */}
+                    {/* <p>평균 별점: {averageRating} / 5</p> */}
+                    <a
+                      href={book.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <button className="purchase-button">구매하기</button>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-          )}
 
-          {selectedItem === 1 && (
-            <div className="introduction-overay">
-              <p className="introduction">책 소개 내용</p>
+            <div className="segmented-control">
+              <button
+                className={selectedItem === 0 ? "active" : ""}
+                onClick={() => handleSelection(0)}
+              >
+                한 줄 리뷰
+              </button>
+              <button
+                className={selectedItem === 1 ? "active" : ""}
+                onClick={() => handleSelection(1)}
+              >
+                책 소개
+              </button>
+              <button
+                className={selectedItem === 2 ? "active" : ""}
+                onClick={() => handleSelection(2)}
+              >
+                Q&A
+              </button>
             </div>
-          )}
 
-          {selectedItem === 2 && <Question />}
-        </div>
+            <div className="content">
+              {selectedItem === 0 && (
+                <div>
+                  <div className="overay">
+                    <input
+                      className="review"
+                      placeholder="당신의 한 줄 리뷰를 남겨주세요!"
+                    />
+                  </div>
+                  <div className="onesentence-list">
+                    {reviews.length > 0 ? (
+                      reviews.map((review) => (
+                        <OneSentence
+                          key={review.id}
+                          userName={review.user}
+                          reviewText={review.content}
+                          rating={review.rating}
+                        />
+                      ))
+                    ) : (
+                      <p>첫 리뷰를 등록해주세요!</p>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {selectedItem === 1 && (
+                <div className="introduction-overay">
+                  <p className="introduction">{book.description}</p>
+                </div>
+              )}
+
+              {selectedItem === 2 && <Question />}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
