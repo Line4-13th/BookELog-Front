@@ -181,7 +181,7 @@ const BookDetail = () => {
             )}
             {selectedItem === 1 && (
               <div className="iintroduction">
-                <p className="iintroduction">{book.description}</p>
+                <p className="iintroduction-p">{book.description}</p>
               </div>
             )}
 

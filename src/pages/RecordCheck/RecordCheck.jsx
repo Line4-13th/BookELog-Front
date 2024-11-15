@@ -1,38 +1,74 @@
-// import React from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./RecordCheck.scss";
 import BackButton from "../../assets/backbutton_brown.svg";
 
 function RecordCheck() {
-  const location = useLocation(); // 전달된 state 가져오기
-  const { bookTitle, recordContent } = location.state || {}; // BookDetailPage에서 전달한 bookTitle과 recordContent 받기
+  const location = useLocation();
+  const { bookTitle, recordContent } = location.state || {};
   const navigate = useNavigate();
 
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("2024 가을"); // 기본 카테고리 설정
+
   const handleBack = () => {
-    navigate(-1); // 이전 페이지로 이동
+    navigate(-1);
   };
 
   const handleImageClick = (imageUrl) => {
     navigate("/fullcontent", { state: { bookTitle, recordContent, imageUrl } });
   };
 
-  // recordContent에서 이미지 URL 추출하기 (정규식을 사용)
   const extractImageUrl = (htmlContent) => {
-    const regex = /<img src="(.*?)"[^>]*>/g; // <img> 태그에서 src 속성의 값을 추출
+    const regex = /<img src="(.*?)"[^>]*>/g;
     const matches = [];
     let match;
     while ((match = regex.exec(htmlContent))) {
-      matches.push(match[1]); // 이미지 URL 저장
+      matches.push(match[1]);
     }
-    return matches; // 추출된 모든 이미지 URL을 배열로 반환
+    return matches;
   };
 
   const imageUrls = extractImageUrl(recordContent);
 
+  const handleNoImageClick = () => {
+    navigate("/fullcontent", {
+      state: { bookTitle, recordContent, imageUrl: null },
+    });
+  };
+
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+    setShowDropdown(false);
+  };
+
   return (
     <div className="rrecord-back">
-      <div className="rrecord-container">
+      <div className="header">
         <img className="bbackbutton" src={BackButton} onClick={handleBack} />
+        <div className="dropdown-wrapper">
+          <div className="dropdown">
+            <p onClick={() => setShowDropdown(!showDropdown)}>
+              {selectedCategory} <span>⬇</span>
+            </p>
+            {showDropdown && (
+              <div className="dropdown-menu">
+                <p onClick={() => handleCategorySelect("2024 가을")}>
+                  2024 가을
+                </p>
+                <p onClick={() => handleCategorySelect("인생 책 모음")}>
+                  인생 책 모음
+                </p>
+                <p onClick={() => handleCategorySelect("2024 여름")}>
+                  2024 여름
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="rrecord-container">
         <div className="record-check-content">
           <div className="content-row">
             {imageUrls.length > 0 ? (
@@ -42,15 +78,14 @@ function RecordCheck() {
                     <img
                       src={url}
                       alt={`Content ${index}`}
-                      onClick={() => handleImageClick(url)} // 클릭 시 해당 이미지의 URL 전달
+                      onClick={() => handleImageClick(url)}
                     />
                   </div>
-                  <p className="book-title">{bookTitle || "제목 없음"}</p>{" "}
-                  {/* 제목 표시 */}
+                  <p className="book-title">{bookTitle || "제목 없음"}</p>
                 </div>
               ))
             ) : (
-              <div className="content-item">
+              <div className="content-item" onClick={handleNoImageClick}>
                 <div className="image-wrapper no-image">
                   <p className="no-image-text">이미지가 없습니다</p>
                 </div>
