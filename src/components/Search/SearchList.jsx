@@ -1,27 +1,22 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // ✨ useNavigate 추가
 import searchIcon from "../../assets/Search/magnifyingglass.svg";
 import "./Search.scss";
 import axios from "axios";
-import BASE_URL from "../../../API_URL";
+import BASE_URL from "../../../API_URL"; // API URL
 
-const Search = ({ setIsSearching }) => {
+const SearchList = () => {
   const [query, setQuery] = useState(""); // 검색어 상태 관리
   const [searchResults, setSearchResults] = useState([]); // 검색 결과 상태
   const [loading, setLoading] = useState(false); // 로딩 상태
   const [error, setError] = useState(null); // 에러 상태
-  const [selectedText, setSelectedText] = useState(""); // ✨ 선택된 텍스트 상태
-  const [isModalOpen, setIsModalOpen] = useState(false); // ✨ 모달 상태
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // ✨ useNavigate 훅 사용
 
   useEffect(() => {
     if (query.trim() === "") {
-      setSearchResults([]);
-      setIsSearching(false); // ✨ 검색 상태 업데이트
+      setSearchResults([]); // 검색어가 없으면 결과 초기화
       return;
     }
-
-    setIsSearching(true); // ✨ 검색 상태 true로 설정
 
     const fetchSearchResults = async () => {
       setLoading(true);
@@ -48,20 +43,16 @@ const Search = ({ setIsSearching }) => {
     };
 
     fetchSearchResults();
-  }, [query, setIsSearching]);
+  }, [query]);
 
+  // ✨ 특정 책의 상세 페이지로 이동
   const handleBookClick = (bookId) => {
-    console.log(`Navigating to book detail page with ID: ${bookId}`);
-    navigate(`/book/${bookId}`);
-  };
+    {
+      console.log(`Navigating to book detail page with ID: ${bookId}`); // 클릭한 책의 ID 확인
+      navigate(`/book/${bookId}`); // BookList와 동일한 URL로 이동
+    }
 
-  const handleTextClick = (fullText) => {
-    setSelectedText(fullText);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
+    navigate(`/book/${bookId}`); // BookList와 동일한 URL로 이동
   };
 
   return (
@@ -83,19 +74,17 @@ const Search = ({ setIsSearching }) => {
         {!loading && searchResults.length > 0 && (
           <ul className="resultList">
             {searchResults.map((book) => (
-              <li key={book.id} className="resultItem">
+              <li
+                key={book.id}
+                className="resultItem"
+                onClick={() => handleBookClick(book.id)}
+              >
                 <img
                   src={book.cover_image}
                   alt={book.introduction}
-                  onClick={() => handleBookClick(book.id)}
+                  // ✨ 이미지 클릭 시 상세 페이지로 이동
                 />
-                <div className="introductionmark">
-                  <p onClick={() => handleTextClick(book.introduction)}>
-                    {book.introduction.length > 50
-                      ? `${book.introduction.slice(0, 50)}...`
-                      : book.introduction}
-                  </p>
-                </div>
+                <p>{book.introduction}</p>
               </li>
             ))}
           </ul>
@@ -104,19 +93,8 @@ const Search = ({ setIsSearching }) => {
           <p className="errormessage">검색 결과가 없습니다.</p>
         )}
       </div>
-
-      {isModalOpen && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={closeModal}>
-              &times;
-            </button>
-            <p>{selectedText}</p>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
-export default Search;
+export default SearchList;

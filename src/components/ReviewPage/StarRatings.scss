@@ -1,0 +1,21 @@
+.star-rating {
+  display: flex;
+  font-size: 15px; // 별 크기
+  gap: 4px; // 별 간격
+}
+
+.star.full {
+  color: gold;
+}
+
+.star.half {
+  color: gold; // 반 별의 경우 필요에 따라 스타일링
+}
+
+.star.empty {
+  color: lightgray;
+}
+
+span {
+  size: 5rem;
+}

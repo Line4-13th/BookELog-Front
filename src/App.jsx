@@ -22,6 +22,7 @@ import FullContent from "./pages/RecordCheck/FullContent";
 import CurationItem from "./pages/Home/CurationItem";
 import Login from "./pages/MyPage/Login";
 import SignUp from "./pages/MyPage/SignUp";
+import SearchList from "./components/Search/SearchList";
 
 function App() {
   return (
@@ -30,11 +31,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/category" element={<Category />} />
         <Route path="/category/:category" element={<CategoryDetail />} />
-        <Route path="/book/:id" element={<BookDetail />} />
+        <Route path="/book/:book_id" element={<BookDetail />} />
         <Route path="/" element={<Question />} /> {/* 메인 질문 페이지 */}
         <Route path="/answers/:id" element={<AnswerList />} />{" "}
         <Route path="/recordcheck" element={<RecordCheck />} />
         <Route path="/fullcontent" element={<FullContent />} />
+        <Route path="/searchlist" element={<SearchList />} />
         {/* RecordCheck 페이지 */}
         {/* 답변 리스트 페이지 */}
         <Route path="/curation" element={<Curation />} />

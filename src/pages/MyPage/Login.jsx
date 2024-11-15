@@ -63,7 +63,9 @@ function Login({ setView }) {
       />
       <button onClick={handleLogin}>Login</button>
       <div className="link-text">
-        <span onClick={() => setView('resetPassword')}>비밀번호를 잊어버리셨나요?</span>
+        <span onClick={() => setView("resetPassword")}>
+          비밀번호를 잊어버리셨나요?
+        </span>
       </div>
       <div className="link-text">
         계정이 없으신가요? <span onClick={() => setView('signup')}>회원가입</span>
