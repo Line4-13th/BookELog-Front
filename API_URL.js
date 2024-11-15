@@ -1,1 +1,1 @@
-export default 'http://localhost:5173'
+export default 'http://127.0.0.1:8000';

@@ -23,7 +23,7 @@ function RecordToggle() {
 
     console.log(``)
 
-    axios.get(`${API_URL}/reading_log/reading_logs/dots/?month=${yearNum}-${monthNum}`)
+    axios.get(`${API_URL}/reading_logs/reading_logs/dots/?month=${yearNum}-${monthNum}`)
       .then(response => {
         const dates = response.data.dots.map(dateString => new Date(dateString));
         setMarkedDates(dates);
