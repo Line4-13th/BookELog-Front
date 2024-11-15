@@ -125,7 +125,7 @@ button {
   // min-width: 23.4375rem; /* 375px → rem으로 변경 */
   width: 100vw;
   margin-top: 1.25rem; /* 20px → rem으로 변경 */
-  border: 1px solid pink;
+  // border: 1px solid pink;
 }
 
 .bookdetail-container {
@@ -251,7 +251,7 @@ input {
     justify-content: center;
     align-items: center;
     width: 80vw;
-    border: 1px solid orange;
+    // border: 1px solid orange;
   }
   .second-overay {
     padding: 0.5rem;
@@ -281,7 +281,7 @@ input {
   margin-bottom: 100px;
   overflow-y: auto;
   gap: 1rem; /* 아이템 간 간격 유지 */
-  border: 1px solid red;
+  // border: 1px solid red;
   scroll-behavior: smooth; /* 부드러운 스크롤 */
 
   p {
