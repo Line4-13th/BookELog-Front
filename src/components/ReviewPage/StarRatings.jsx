@@ -1,34 +1,34 @@
 // StarRatings.jsx
-import React from "react";
+import React, { useState } from "react";
 import "./StarRatings.scss";
 
-const StarRatings = ({ rating }) => {
-  const fullStars = Math.floor(rating); // 채워진 별의 개수
-  const hasHalfStar = rating % 1 >= 0.5; // 반 별 여부
-  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0); // 빈 별 개수
+const StarRatings = ({ rating, onRatingChange }) => {
+  const [hoverRating, setHoverRating] = useState(null);
+
+  const handleClick = (newRating) => {
+    if (onRatingChange) onRatingChange(newRating); // 부모 컴포넌트로 선택된 별점 전달
+  };
 
   return (
     <div className="star-ratings">
-      {/* 채워진 별 */}
-      {Array(fullStars)
+      {Array(5)
         .fill()
-        .map((_, index) => (
-          <span key={`full-${index}`} className="star full">
-            ★
-          </span>
-        ))}
-
-      {/* 반 별 */}
-      {hasHalfStar && <span className="star half">☆</span>}
-
-      {/* 빈 별 */}
-      {Array(emptyStars)
-        .fill()
-        .map((_, index) => (
-          <span key={`empty-${index}`} className="star empty">
-            ☆
-          </span>
-        ))}
+        .map((_, index) => {
+          const currentRating = index + 1;
+          return (
+            <span
+              key={index}
+              className={`star ${
+                currentRating <= (hoverRating || rating) ? "full" : "empty"
+              }`}
+              onMouseEnter={() => setHoverRating(currentRating)}
+              onMouseLeave={() => setHoverRating(null)}
+              onClick={() => handleClick(currentRating)}
+            >
+              ★
+            </span>
+          );
+        })}
     </div>
   );
 };

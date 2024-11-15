@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom"; // ✨ useParams 추가
+import { useNavigate, useParams } from "react-router-dom";
 import "./BookDetail.scss";
 import BackButton from "../../assets/BackButton.svg";
 import OneSentence from "../../components/ReviewPage/OneSentence";
@@ -12,23 +12,26 @@ const BookDetail = () => {
   const navigate = useNavigate();
   const { book_id } = useParams(); // ✨ URL에서 book_id 가져오기
 
-  const [book, setBook] = useState(null); // ✨ 책 상세 정보 상태
-  const [reviews, setReviews] = useState([]); // ✨ 리뷰 상태
-  const [averageRating, setAverageRating] = useState(0); // ✨ 평균 별점
+  const [book, setBook] = useState(null);
+  const [reviews, setReviews] = useState([]);
+  const [averageRating, setAverageRating] = useState(0);
   const [selectedItem, setSelectedItem] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // ✨ 모달 상태와 별점 선택 상태
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRating, setSelectedRating] = useState(0);
+
   useEffect(() => {
-    console.log("Received book id:", book_id);
     const fetchBookDetail = async () => {
       try {
         const response = await axios.get(
           `${BASE_URL}/api/books/bookdetail/${book_id}/`
         );
         setBook(response.data);
-        setReviews(response.data.reviews); // ✨ 리뷰 상태 설정
-        calculateRatingStats(response.data.reviews); // ✨ 별점 통계 계산
+        setReviews(response.data.reviews);
+        calculateRatingStats(response.data.reviews);
         setError(null);
       } catch (err) {
         console.error("책 상세 정보를 불러오는 중 오류 발생:", err);
@@ -48,7 +51,7 @@ const BookDetail = () => {
       (sum, review) => sum + review.rating,
       0
     );
-    setAverageRating((totalRatings / reviews.length).toFixed(1)); // 평균 별점 계산
+    setAverageRating((totalRatings / reviews.length).toFixed(1));
   };
 
   const goBack = () => {
@@ -57,6 +60,28 @@ const BookDetail = () => {
 
   const handleSelection = (index) => {
     setSelectedItem(index);
+  };
+
+  // ✨ 별점 POST 요청
+  const postRating = async () => {
+    try {
+      await axios.post(`${BASE_URL}/api/books/bookdetail/${book_id}/review/`, {
+        userName: "",
+        rating: selectedRating,
+        content: "",
+      });
+      alert("별점이 저장되었습니다!");
+      setIsModalOpen(false);
+      // 새 데이터 가져오기
+      const response = await axios.get(
+        `${BASE_URL}/api/books/bookdetail/${book_id}/`
+      );
+      setReviews(response.data.reviews);
+      calculateRatingStats(response.data.reviews);
+    } catch (error) {
+      console.error("별점 저장 중 오류 발생:", error);
+      alert("별점을 저장하는 데 실패했습니다.");
+    }
   };
 
   if (loading) return <p>로딩 중...</p>;
@@ -88,9 +113,15 @@ const BookDetail = () => {
                     <h2>{`《${book.title}》`}</h2>
                     <p className="author-info">{`${book.author}`}</p>
                     <p className="publication-info">{`${book.publisher} | ${book.date}`}</p>
-                    <StarRatings rating={averageRating} />{" "}
-                    {/* 평균 별점 표시 */}
-                    {/* <p>평균 별점: {averageRating} / 5</p> */}
+                    <div className="star-container">
+                      <StarRatings rating={averageRating} />
+                      <button
+                        className="star-button"
+                        onClick={() => setIsModalOpen(true)}
+                      >
+                        별점 주기
+                      </button>
+                    </div>
                     <a
                       href={book.link}
                       target="_blank"
@@ -124,40 +155,78 @@ const BookDetail = () => {
               </button>
             </div>
 
-            <div className="content">
-              {selectedItem === 0 && (
-                <div>
-                  <div className="overay">
-                    <input
-                      className="review"
-                      placeholder="당신의 한 줄 리뷰를 남겨주세요!"
-                    />
+            {selectedItem === 0 && (
+              <div>
+                <div className="overay">
+                  <input
+                    className="review"
+                    placeholder="당신의 한 줄 리뷰를 남겨주세요!"
+                  />
+                </div>
+                <div className="onesentence-list">
+                  {reviews.length > 0 ? (
+                    reviews.map((review) => (
+                      <OneSentence
+                        key={review.id}
+                        userName={review.user}
+                        reviewText={review.content}
+                        rating={review.rating}
+                      />
+                    ))
+                  ) : (
+                    <p>첫 리뷰를 등록해주세요!</p>
+                  )}
+                </div>
+              </div>
+            )}
+            {selectedItem === 1 && (
+              <div className="iintroduction">
+                <p className="iintroduction">{book.description}</p>
+              </div>
+            )}
+
+            {selectedItem === 2 && <Question />}
+
+            {/* ✨ 별점 모달 */}
+            {isModalOpen && (
+              <div
+                className="modal-overlay"
+                onClick={() => setIsModalOpen(false)}
+              >
+                <div
+                  className="star-modal-content"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <h2 className="star-number">별점 주기</h2>
+                  <div className="star-span">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <span
+                        key={star}
+                        onClick={() => setSelectedRating(star)}
+                        style={{
+                          cursor: "pointer",
+                          fontSize: "24px",
+                          color: star <= selectedRating ? "gold" : "gray",
+                        }}
+                      >
+                        ★
+                      </span>
+                    ))}
                   </div>
-                  <div className="onesentence-list">
-                    {reviews.length > 0 ? (
-                      reviews.map((review) => (
-                        <OneSentence
-                          key={review.id}
-                          userName={review.user}
-                          reviewText={review.content}
-                          rating={review.rating}
-                        />
-                      ))
-                    ) : (
-                      <p>첫 리뷰를 등록해주세요!</p>
-                    )}
+                  <div>
+                    <button onClick={postRating} className="star-submit-button">
+                      저장
+                    </button>
+                    <button
+                      onClick={() => setIsModalOpen(false)}
+                      className="star-close-button"
+                    >
+                      닫기
+                    </button>
                   </div>
                 </div>
-              )}
-
-              {selectedItem === 1 && (
-                <div className="introduction-overay">
-                  <p className="introduction">{book.description}</p>
-                </div>
-              )}
-
-              {selectedItem === 2 && <Question />}
-            </div>
+              </div>
+            )}
           </>
         )}
       </div>

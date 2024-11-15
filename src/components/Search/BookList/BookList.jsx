@@ -80,7 +80,9 @@ const BookList = ({ category }) => {
             </div>
           ))
         ) : (
-          <p>선택한 카테고리에 해당하는 책이 없습니다.</p>
+          <p className="no-book-message">
+            선택한 카테고리에 해당하는 책이 없습니다.
+          </p>
         )}
       </div>
 
