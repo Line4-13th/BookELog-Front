@@ -27,16 +27,29 @@ function Home() {
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    if (searchQuery.trim() === '') return;
+    if (searchQuery.trim() === '') {
+      setSearchResults([]);
+      return;
+    };
+    console.log(searchQuery);
 
     try {
-      const response = await axios.get(`${API_URL}/reading_log/books/search/`, {
-        params: { title: searchQuery },
-      });
-      setSearchResults(response.data);
+      const response = await axios.get(`${API_URL}/api/books/?search=${searchQuery}`);
+      console.log(response.data);
+      if (Array.isArray(response.data)) {
+        setSearchResults(response.data);
+      } else {
+        console.error("Unexpected data format:", response.data);
+        setSearchResults([]);
+      }
     } catch (error) {
       console.error('검색결과 fetch 오류: ', error);
     }
+  };
+
+  const handleBookClick = (bookId) => {
+    console.log(`Navigating to book detail page with ID: ${bookId}`);
+    navigate(`/book/${bookId}`);
   };
 
   return (
@@ -68,14 +81,14 @@ function Home() {
       </header>
       <section className="home-section">
         {searchQuery ? (
-          <>
+          <div className="home-grid">
             {searchResults.map((book, index) => (
               <div key={index} className="home-book-item">
                 <img src={book.cover_image} alt={`${book.title} cover`} className="home-book-cover" />
                 <p className="record-book-introduction">{book.introduction}</p>
               </div>
             ))}
-          </>
+          </div>
         ) : (
           <>
             <Recommend />
