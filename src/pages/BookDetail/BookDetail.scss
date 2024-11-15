@@ -106,8 +106,16 @@ button {
 }
 
 .book-cover {
-  width: 5rem;
-  height: 7rem;
+  .book-cover-img {
+    width: 6rem;
+    height: auto;
+    height: 8rem;
+    min-height: 150px;
+    background-color: #f0f0f0;
+    margin-bottom: 0;
+    object-fit: cover;
+    border-radius: 4px;
+  }
 }
 .whole-container {
   height: 100vh; /* 화면 전체 높이를 차지하도록 설정 */
@@ -263,16 +271,6 @@ input {
   }
 }
 
-.introduction-overay {
-  border-radius: 20px;
-  background: var(--back2, #fff9e7);
-  box-sizing: border-box;
-  font-size: 0.8rem;
-  width: 100vw; /* 화면 너비 100% */
-  padding: 1rem;
-  height: 100vh;
-}
-
 .onesentence-list {
   display: flex;
   flex-direction: column;
@@ -285,4 +283,65 @@ input {
   gap: 1rem; /* 아이템 간 간격 유지 */
   border: 1px solid red;
   scroll-behavior: smooth; /* 부드러운 스크롤 */
+
+  p {
+    color: #53301f;
+  }
+}
+
+.star-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.star-button {
+  border-radius: 5px;
+  background: #ffc41f;
+  width: 20vw;
+  text-align: center;
+  padding: 2px;
+}
+
+.star-modal-content {
+  width: 80vw;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+
+  .star-number {
+    -webkit-text-stroke: 0.5px #ffc41f; /* 외곽선 두께와 색상 */
+    color: #6e4d3b;
+  }
+
+  .star-submit-button {
+    color: #ffc41f;
+    background-color: #6e4d3b;
+    width: 5rem;
+    margin-right: 5px;
+    text-align: center;
+  }
+
+  .star-close-button {
+    color: #ffc41f;
+    background-color: #6e4d3b;
+    width: 5rem;
+    text-align: center;
+  }
+}
+
+.iintroduction {
+  border-radius: 20px;
+  background: var(--back2, #fff9e7);
+  box-sizing: border-box;
+  font-size: 0.8rem;
+  width: 100vw; /* 화면 너비 100% */
+  padding: 1rem;
+  height: 100vh;
 }

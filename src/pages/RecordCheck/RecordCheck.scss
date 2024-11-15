@@ -1,21 +1,95 @@
+.header {
+  display: flex;
+  align-items: center; // 세로 중심 정렬
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #fff9e7;
+  border-bottom: 1px solid #53301f;
+  position: relative; // 정중앙 위치를 위한 상대적 위치 설정
+
+  .bbackbutton {
+    cursor: pointer;
+    position: absolute;
+    left: 10px; // 좌측 여백
+  }
+
+  .dropdown-wrapper {
+    flex: 1; // 여유 공간 차지
+    display: flex;
+    justify-content: center; // 수평 중앙 정렬
+  }
+
+  .dropdown {
+    position: relative;
+    font-size: 16px;
+    color: #53301f;
+    cursor: pointer;
+
+    span {
+      font-size: 12px;
+      margin-left: 5px;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 30px;
+      left: 50%; // 중앙 정렬
+      transform: translateX(-50%); // 수평 가운데 맞춤
+      background-color: #fff9e7;
+      border: 1px solid #53301f;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      width: 8rem;
+
+      p {
+        padding: 10px;
+        margin: 0;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #e0d5c0;
+        }
+      }
+    }
+  }
+}
+
+.rrecord-back {
+  background: var(--back2, #fff9e7);
+  display: flex;
+  flex-direction: column;
+
+  .bbackbutton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer; // 클릭 가능 표시
+  }
+}
+
 .rrecord-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+  width: 100vw;
+  height: 100vh;
 }
 
 .record-check-content {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 90%;
+  margin-top: 40px;
 }
 
 .content-row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 한 줄에 두 개씩 배치 */
-  gap: 2rem; /* 아이템 사이의 간격을 설정 */
+  grid-template-columns: repeat(2, 1fr); // 한 줄에 두 개씩 배치
+  gap: 2rem; // 아이템 사이 간격
   width: 100%;
   box-sizing: border-box;
 }
@@ -25,35 +99,34 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  overflow: hidden; /* 이미지가 정사각형을 벗어나지 않도록 */
-  aspect-ratio: 1 / 1; /* 정사각형 비율을 유지 */
-  border-radius: 10px;
-  background-color: #f0f0f0; /* 이미지가 없을 때 배경색 설정 */
-  justify-content: center; /* 텍스트를 세로로 중앙 정렬 */
-  text-align: center; /* 텍스트를 가로로 중앙 정렬 */
-}
-
-.content-item img {
-  object-fit: cover; /* 이미지를 정사각형 비율에 맞게 크기 조정 */
   width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  aspect-ratio: 1 / 1; /* 정사각형 비율을 유지 */
-}
+  margin-bottom: 20px;
 
-.content-item h3 {
-  font-size: 2rem;
-  text-align: center;
-  margin-top: 1rem;
-}
+  .image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1; // 정사각형 비율 유지
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #f0f0f0; // 이미지 없는 경우 배경
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.content-item p {
-  font-size: 1rem; /* "이미지가 없습니다" 텍스트 크기 설정 */
-  color: #888; /* 텍스트 색상 설정 */
-  margin-top: 1rem;
-}
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // 정사각형 비율 유지
+  }
 
-.content-item p:hover {
-  cursor: pointer; /* 텍스트 클릭 가능하도록 설정 */
-  color: #444; /* 텍스트가 클릭될 때 색상 변경 */
+  .book-title {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 90%;
+    text-align: center;
+  }
 }

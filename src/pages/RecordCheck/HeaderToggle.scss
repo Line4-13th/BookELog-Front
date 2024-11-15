@@ -1,0 +1,53 @@
+.book-detail-header {
+  position: relative;
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #53301f;
+
+  .back-button,
+  .save-button {
+    background-color: #e0d5c0;
+    padding: 1vh 4vw;
+    border: none;
+    border-radius: 5px;
+    font-size: 2vh;
+    color: #53301f;
+    cursor: pointer;
+  }
+
+  .folder-dropdown {
+    font-size: 2.5vh;
+    color: #53301f;
+    position: relative;
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 30vw;
+      border: 1px solid #53301f;
+      background-color: #fff9e7;
+      border-radius: 5px;
+      overflow: hidden;
+      z-index: 100;
+
+      p {
+        margin: 0;
+        padding: 1vh 2vw;
+        font-size: 2vh;
+        cursor: pointer;
+        border-bottom: 1px solid #53301f;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &:hover {
+          background-color: #e0d5c0;
+        }
+      }
+    }
+  }
+}
