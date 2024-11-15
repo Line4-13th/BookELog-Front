@@ -18,6 +18,14 @@
   }
 }
 
+.home-result-image {
+  width: 120vw !important;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+  z-index: 9999;
+}
+
 .home-container header {
   min-height: 20%;
   width: 100%;
@@ -71,4 +79,54 @@
   
   position: absolute;
   top: 20%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 한 행에 3개의 아이템 */
+  gap: 1rem; /* 각 아이템 간격 */
+  padding-right: 1.8rem;
+  padding-left: 1rem;
+  justify-items: center; /* 아이템을 중앙에 정렬 */
+  box-sizing: border-box;
+  width: 100vw;
+  margin-left: 0;
+}
+
+.home-book-item {
+  // border: 1px solid red;
+  box-sizing: border-box;
+
+  width: 25vw;
+  margin-top: 1vh;
+}
+
+@media (max-height: 670px) {
+  .home-book-item {
+    margin-top: 3vh;
+  }
+}
+
+.home-book-cover {
+  width: 7rem;
+  margin: 0;
+}
+
+.record-book-introduction {
+  width: 4rem;
+  height: auto;
+  margin-top: 0;
+  margin-left: 1rem;
+  background-color: white;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.6rem;
+  color:#53301F;
+
+  outline: 4px solid white;
+  border: 1px solid #53301F;
 }

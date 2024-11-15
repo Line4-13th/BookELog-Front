@@ -11,7 +11,7 @@ function FolderView() {
   const [isAddingFolder, setIsAddingFolder] = useState(false);
 
   useEffect(() => {
-    axios.get(`${API_URL}/reading_log/folders/`)
+    axios.get(`${API_URL}/api/reading_log/folders/`)
       .then(response => {
         const folderData = response.data.map(folder => ({
           ...folder,
@@ -29,7 +29,7 @@ function FolderView() {
     if (newFolderName.trim() === '') return;
 
     try {
-      const response = await axios.post(`${API_URL}/reading_log/folders/create_folder`, {
+      const response = await axios.post(`${API_URL}/api/reading_log/folders/create_folder/`, {
         name: '새 파일', // 항상 "새 파일"로 이름을 초기화하여 요청
       });
 
