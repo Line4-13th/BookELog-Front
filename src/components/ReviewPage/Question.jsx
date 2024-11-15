@@ -12,8 +12,21 @@ const Question = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null); // 선택된 질문
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [newAnswer, setNewAnswer] = useState(""); // 새로운 답변 상태
+  const [user, setUser] = useState(null); // 로그인된 사용자 정보
 
   useEffect(() => {
+    // 로그인 상태 확인 및 사용자 정보 가져오기
+    const storedUser = JSON.parse(localStorage.getItem("userData")); // 로컬 스토리지에서 사용자 정보 가져오기
+
+    if (storedUser) {
+      console.log("로그인된 사용자 정보:", storedUser);
+      setUser(storedUser); // 상태에 사용자 정보 설정
+    } else {
+      console.warn("사용자가 로그인되어 있지 않습니다.");
+    }
+
+    // 질문 데이터 가져오기
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
@@ -48,6 +61,33 @@ const Question = () => {
 
   const handleCloseModal = () => {
     setSelectedQuestion(null);
+    setNewAnswer(""); // 모달 닫을 때 입력 필드 초기화
+  };
+
+  const handleAnswerSubmit = async (questionId) => {
+    if (!newAnswer.trim()) {
+      alert("답변을 입력해주세요.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/books/bookdetail/${book_id}/${questionId}/answer/`,
+        {
+          username: user?.username || "Unknown User", // 로그인된 사용자 이름 사용
+          content: newAnswer,
+        }
+      );
+      console.log("Answer submitted:", response.data);
+      console.log("현재 사용자 이름:", user?.username); // username 값 확인용 로그
+
+      // 모달 닫기 후 질문 갱신
+      handleOpenModal(selectedQuestion.id);
+      setNewAnswer("");
+    } catch (error) {
+      console.error("답변 저장 중 오류 발생:", error);
+      alert("답변을 저장하는 데 실패했습니다.");
+    }
   };
 
   if (loading) return <p>로딩 중...</p>;
@@ -86,13 +126,33 @@ const Question = () => {
       {selectedQuestion && (
         <div className="modal-overlay" onClick={handleCloseModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>질문: {selectedQuestion.content}</h2>
+            <h2 className="modal-question">Q. {selectedQuestion.content}</h2>
             {selectedQuestion.answers.map((answer) => (
               <div key={answer.id} className="answer-item">
-                <h3>답변 {answer.id}</h3>
+                <div className="userandid">
+                  <h2>A.</h2>
+                  <h2>{answer.user}</h2>
+                </div>
                 <p>{answer.content}</p>
               </div>
             ))}
+
+            {/* 답변 작성 영역 */}
+            <div className="new-answer">
+              <input
+                type="text"
+                placeholder="답변을 작성해주세요."
+                value={newAnswer}
+                onChange={(e) => setNewAnswer(e.target.value)}
+              />
+              <button
+                onClick={() => handleAnswerSubmit(selectedQuestion)}
+                className="submit-answer"
+              >
+                답변 등록
+              </button>
+            </div>
+
             <button onClick={handleCloseModal} className="close-modal">
               닫기
             </button>
