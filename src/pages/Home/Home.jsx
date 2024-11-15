@@ -74,13 +74,13 @@ function Home() {
           <input
             type="text"
             value={searchQuery}
-            placeholder="Search"
+            placeholder="Search + Enter"
             onChange={handleSearchChange}
           />
         </form>
       </header>
       <section className="home-section">
-        {searchQuery ? (
+        {searchQuery !== '' ? (
           <div className="home-grid">
             {searchResults.map((book, index) => (
               <div key={index} className="home-book-item">
