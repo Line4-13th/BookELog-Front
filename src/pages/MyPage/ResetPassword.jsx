@@ -17,6 +17,7 @@ const ResetPassword = ({ setView }) => {
       <button onClick={() => alert('비밀번호 재설정 이메일이 전송되었습니다.')}>
         send
       </button>
+      
       <div className="link-text">
         <span onClick={() => setView('login')}>로그인으로 돌아가기</span>
       </div>
