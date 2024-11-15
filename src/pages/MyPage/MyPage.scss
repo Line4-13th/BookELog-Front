@@ -4,10 +4,10 @@
   align-items: center;
   justify-content: center;
   height: 100vh; // Full screen height
-  width: 100vw; // Full screen width
   max-width: 375px; // Optimized for iPhone SE width
   background-color: #5c3d2e; // Background color
-  padding: 0 20px;
+  padding: 0 43px;
+  margin: 0 auto; // 중앙 정렬
 
   .mypage-content {
     width: 100%;

@@ -1,39 +1,49 @@
 // src/pages/Home/Login.jsx
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios"; // axios 추가
-import "./Login.scss"; // For Login.jsx
-import BASE_URL from "../../../API_URL"; // API URL
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import API_URL from '../../../API_URL';
+import './Login.scss';
 
-const Login = ({ setView }) => {
-  const [loginUserId, setLoginUserId] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+function Login({ setView }) {
+  const [loginUserId, setLoginUserId] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    if (!loginUserId || !loginPassword) {
-      alert("아이디와 비밀번호를 모두 입력해주세요.");
+    if (loginUserId.trim() === '' || loginPassword.trim() === '') {
+      alert('아이디와 비밀번호를 입력해주세요.');
       return;
     }
 
     try {
-      const response = await axios.post(`${BASE_URL}/api/mypage/login/`, {
+      // Send the POST request to the login endpoint
+      const response = await axios.post(`${API_URL}/api/mypage/login/`, {
         username: loginUserId,
         password: loginPassword,
       });
 
-      console.log("로그인 성공:", response.data);
+      if (response.data.message === '로그인 성공') {
+        const storedUserData = {
+          userId: loginUserId,
+          nickname: response.data.nickname || 'User', // Use nickname from response or default to 'User'
+        };
 
-      // 로그인 성공 후 사용자 데이터를 저장하거나 필요한 처리를 수행
-      localStorage.setItem("userToken", response.data.token); // 예시로 토큰 저장
+        // Store user data in localStorage for session persistence
+        localStorage.setItem('userData', JSON.stringify(storedUserData));
 
-      // 사용자 프로필로 이동 (닉네임은 API 응답으로 제공된다고 가정)
-      navigate("/profile", {
-        state: { nickname: response.data.nickname || "User" },
-      });
+        // Redirect to ProfilePage with nickname state
+        navigate('/profile', { state: { nickname: storedUserData.nickname } });
+      } else {
+        alert(response.data.message || '아이디 또는 비밀번호가 일치하지 않습니다.');
+      }
     } catch (error) {
-      console.error("로그인 중 오류 발생:", error);
-      alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.");
+      console.error('로그인 오류:', error);
+      if (error.response) {
+        alert(`로그인 실패: ${error.response.data.message || '요청에 실패했습니다.'}`);
+      } else {
+        alert('서버와의 연결에 문제가 있습니다.');
+      }
     }
   };
 
@@ -58,11 +68,13 @@ const Login = ({ setView }) => {
         </span>
       </div>
       <div className="link-text">
-        계정이 없으신가요?{" "}
-        <span onClick={() => setView("signup")}>sign up</span>
+        계정이 없으신가요? <span onClick={() => setView('signup')}>회원가입</span>
       </div>
     </div>
   );
-};
+}
 
 export default Login;
+
+
+
