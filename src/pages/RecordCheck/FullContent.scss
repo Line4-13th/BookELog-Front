@@ -5,25 +5,38 @@
   justify-content: flex-start;
   padding: 2rem;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   box-sizing: border-box;
   background: var(--back2, #fff9e7);
+}
+
+.bbackbutton {
+  position: absolute; /* 부모 기준 위치 조정 */
+  left: 20px; /* 왼쪽에서 10px 간격 */
+  top: 20px; /* 상단에서 10px 간격 */
+  cursor: pointer; /* 클릭 가능하도록 설정 */
+  width: 45px; /* 버튼 크기 조정 */
+  height: auto; /* 가로 비율 유지 */
+  margin-bottom: 30px;
 }
 
 .full-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 90vw;
   margin-top: 1rem;
   text-align: center;
+  box-sizing: border-box;
+  height: 100vh;
+  margin-bottom: 100px;
 }
 
 .book-detail-header {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: 2rem;
+  // margin-bottom: 2rem;
 }
 
 .back-button {
@@ -32,13 +45,14 @@
 }
 
 .full-content div {
-  width: 100%;
+  width: 100vw;
   max-width: 60rem; /* 텍스트가 길어지지 않도록 최대 폭 제한 */
   font-size: 1.8rem; /* 기본 글자 크기 설정 */
   line-height: 1.6;
   margin-top: 2rem;
   word-wrap: break-word; /* 긴 텍스트가 화면 밖으로 나가지 않도록 처리 */
   text-align: center;
+  box-sizing: border-box;
 }
 
 /* 반응형 처리 */
@@ -48,7 +62,7 @@
 }
 
 .full-content img {
-  max-width: 100vw; /* 화면에 맞게 이미지 크기 조정 */
+  width: 10rem; /* 화면에 맞게 이미지 크기 조정 */
   height: auto;
   margin-bottom: 2rem;
 }
@@ -57,6 +71,7 @@
   display: flex;
   justify-content: center;
   gap: 2px;
+  margin-top: 30px;
 }
 
 .ssave-button,

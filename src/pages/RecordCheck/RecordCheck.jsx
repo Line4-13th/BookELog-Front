@@ -1,71 +1,132 @@
-// import React from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./RecordCheck.scss";
+import BackButton from "../../assets/backbutton_brown.svg";
+import BASE_URL from "../../../API_URL"; // API URL
 
 function RecordCheck() {
-  const location = useLocation(); // 전달된 state 가져오기
-  const { bookTitle, recordContent } = location.state || {}; // BookDetailPage에서 전달한 bookTitle과 recordContent 받기
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const handleBack = () => {
-    navigate(-1); // 이전 페이지로 이동
-  };
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("2024 가을"); // 기본 카테고리 설정
+  const [categories, setCategories] = useState([]); // 폴더 카테고리 리스트
+  const [previewRecords, setPreviewRecords] = useState([]); // 폴더별 독서기록 미리보기 데이터
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const handleImageClick = (imageUrl) => {
-    navigate("/fullcontent", { state: { bookTitle, recordContent, imageUrl } });
-  };
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          `${BASE_URL}/api/reading_log/folders/`
+        );
+        setCategories(response.data);
+        setSelectedCategory(response.data[0]?.name || ""); // 첫 번째 카테고리 기본 선택
+        fetchPreviewRecords(response.data[0]?.id);
+        setError(null);
+      } catch (err) {
+        console.error("카테고리 데이터를 가져오는 중 오류 발생:", err);
+        setError("카테고리 데이터를 가져오는 데 실패했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // recordContent에서 이미지 URL 추출하기 (정규식을 사용)
-  const extractImageUrl = (htmlContent) => {
-    const regex = /<img src="(.*?)"[^>]*>/g; // <img> 태그에서 src 속성의 값을 추출
-    const matches = [];
-    let match;
-    while ((match = regex.exec(htmlContent))) {
-      matches.push(match[1]); // 이미지 URL 저장
+    fetchCategories();
+  }, []);
+
+  const fetchPreviewRecords = async (folderId) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/api/reading_log/user_reading_logs/folder/${folderId}/`
+      );
+      setPreviewRecords(response.data);
+      setError(null);
+    } catch (err) {
+      console.error("미리보기 데이터를 가져오는 중 오류 발생:", err);
+      setError("미리보기 데이터를 가져오는 데 실패했습니다.");
+    } finally {
+      setLoading(false);
     }
-    return matches; // 추출된 모든 이미지 URL을 배열로 반환
   };
 
-  const imageUrls = extractImageUrl(recordContent);
-  const defaultImage = "path/to/your/default-image.png"; // 대체 이미지 경로
-
-  // 이미지가 없을 경우에도 클릭 시 이동할 수 있게 하도록 처리
-  const handleNoImageClick = () => {
-    // 이미지가 없더라도 이동하도록 처리
-    navigate("/fullcontent", {
-      state: { bookTitle, recordContent, imageUrl: defaultImage },
-    });
+  const handleCategorySelect = (categoryName, folderId) => {
+    setSelectedCategory(categoryName);
+    setShowDropdown(false);
+    fetchPreviewRecords(folderId);
   };
+
+  const handleBack = () => {
+    navigate(-1);
+  };
+
+  if (loading) return <p>로딩 중...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
-    <div className="rrecord-container">
-      <header className="book-detail-header">
-        <button className="back-button" onClick={handleBack}>
-          ←
-        </button>
-        <div className="folder-dropdown">
-          <p>{bookTitle}</p> {/* 전달된 제목 표시 */}
-        </div>
-      </header>
-
-      <div className="record-check-content">
-        <div className="content-row">
-          {imageUrls.length > 0 ? (
-            imageUrls.map((url, index) => (
-              <div className="content-item" key={index}>
-                <img
-                  src={url || defaultImage} // 이미지가 없으면 기본 대체 이미지 사용
-                  alt={`Content ${index}`}
-                  onClick={() => handleImageClick(url)} // 클릭 시 해당 이미지의 URL 전달
-                />
+    <div className="rrecord-back">
+      <div className="header">
+        <img className="bbackbutton" src={BackButton} onClick={handleBack} />
+        <div className="dropdown-wrapper">
+          <div className="dropdown">
+            <p onClick={() => setShowDropdown(!showDropdown)}>
+              {selectedCategory} <span>⬇</span>
+            </p>
+            {showDropdown && (
+              <div className="dropdown-menu">
+                {categories.map((category) => (
+                  <p
+                    key={category.id}
+                    onClick={() =>
+                      handleCategorySelect(category.name, category.id)
+                    }
+                  >
+                    {category.name}
+                  </p>
+                ))}
               </div>
-            ))
-          ) : (
-            <div className="content-item" onClick={handleNoImageClick}>
-              <p>이미지가 없습니다</p>{" "}
-              {/* 이미지가 없으면 텍스트로 대체, 클릭 시 이동 */}
-            </div>
-          )}
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="rrecord-container">
+        <div className="record-check-content">
+          <div className="content-row">
+            {previewRecords.length > 0 ? (
+              previewRecords.map((record) => (
+                <div className="content-item" key={record.id}>
+                  <div className="image-wrapper">
+                    <img
+                      src={`${BASE_URL}${record.image}`}
+                      alt={record.book_title}
+                      onClick={() =>
+                        navigate("/fullcontent", {
+                          state: {
+                            logId: record.id,
+                            bookTitle: record.book_title,
+                          },
+                        })
+                      }
+                      onError={(e) => {
+                        e.target.src = "/path/to/default/image.png"; // 기본 이미지 경로
+                      }}
+                    />
+                  </div>
+                  <p className="book-title">
+                    {record.book_title || "제목 없음"}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <div className="content-item no-records">
+                <p>이 폴더에 기록이 없습니다.</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

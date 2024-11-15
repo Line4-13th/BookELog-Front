@@ -1,3 +1,4 @@
+import { useState } from "react"; // ✨ useState 추가
 import { useNavigate } from "react-router-dom";
 
 import UpBar from "../../components/UpBar/UpBar";
@@ -8,6 +9,7 @@ import CategoryTitle from "../../components/Search/CategoryTitle";
 import NavBar from "../../components/Navbar";
 
 const CategoryPage = () => {
+  const [isSearching, setIsSearching] = useState(false); // ✨ 검색 상태 관리
   const categories = [
     "시∙에세이",
     "장편 소설",
@@ -30,19 +32,23 @@ const CategoryPage = () => {
       <CategoryTitle title="카테고리" />
       <div className="all">
         <div className="Category">
-          <Search />
-          <div className="Category-container">
-            {categories.map((category, index) => (
-              <Category
-                key={index}
-                title={category}
-                className="grid-container"
-                onClick={() => handleCategoryClick(category)}
-              /> // Category 컴포넌트를 여러 개 렌더링
-            ))}
+          {/* ✨ setIsSearching 전달 */}
+          <Search setIsSearching={setIsSearching} />
 
-            <NavBar />
-          </div>
+          {/* ✨ isSearching이 false일 때만 카테고리 표시 */}
+          {!isSearching && (
+            <div className="Category-container">
+              {categories.map((category, index) => (
+                <Category
+                  key={index}
+                  title={category}
+                  className="grid-container"
+                  onClick={() => handleCategoryClick(category)}
+                />
+              ))}
+              <NavBar />
+            </div>
+          )}
         </div>
       </div>
     </div>
