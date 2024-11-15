@@ -1,14 +1,46 @@
-// import React from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
+import BASE_URL from "../../../API_URL"; // API URL
 
 function HeaderToggle({
   selectedFolder,
-  showDropdown,
-  setShowDropdown,
-  handleFolderSelect,
+  setSelectedFolder,
   handleSave,
   onBackClick,
 }) {
+  const [folders, setFolders] = useState([]); // 폴더 목록 상태
+  const [showDropdown, setShowDropdown] = useState(false); // 드롭다운 상태
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchFolders = async () => {
+      try {
+        const response = await axios.get(
+          `${BASE_URL}/api/reading_log/folders/`
+        );
+        setFolders(response.data);
+        setError(null);
+      } catch (err) {
+        console.error("폴더 데이터를 불러오는 중 오류 발생:", err);
+        setError("폴더 데이터를 가져오는 데 실패했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFolders();
+  }, []);
+
+  const handleFolderSelect = (folderName) => {
+    setSelectedFolder(folderName);
+    setShowDropdown(false);
+  };
+
+  if (loading) return <p>로딩 중...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <header className="book-detail-header">
       <button className="back-button" onClick={onBackClick}>
@@ -18,11 +50,14 @@ function HeaderToggle({
         <p onClick={() => setShowDropdown(!showDropdown)}>{selectedFolder} ⬇</p>
         {showDropdown && (
           <div className="dropdown-menu">
-            <p onClick={() => handleFolderSelect("2024 가을")}>2024 가을</p>
-            <p onClick={() => handleFolderSelect("인생 책 모음")}>
-              인생 책 모음
-            </p>
-            <p onClick={() => handleFolderSelect("2024 여름")}>2024 여름</p>
+            {folders.map((folder) => (
+              <p
+                key={folder.id}
+                onClick={() => handleFolderSelect(folder.name)}
+              >
+                {folder.name}
+              </p>
+            ))}
           </div>
         )}
       </div>
@@ -35,9 +70,7 @@ function HeaderToggle({
 
 HeaderToggle.propTypes = {
   selectedFolder: PropTypes.string.isRequired,
-  showDropdown: PropTypes.bool.isRequired,
-  setShowDropdown: PropTypes.func.isRequired,
-  handleFolderSelect: PropTypes.func.isRequired,
+  setSelectedFolder: PropTypes.func.isRequired,
   handleSave: PropTypes.func.isRequired,
   onBackClick: PropTypes.func.isRequired,
 };
