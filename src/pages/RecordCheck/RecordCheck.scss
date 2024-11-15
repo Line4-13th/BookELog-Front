@@ -59,6 +59,7 @@
   background: var(--back2, #fff9e7);
   display: flex;
   flex-direction: column;
+  height: 100vh;
 
   .bbackbutton {
     position: absolute;
@@ -75,6 +76,8 @@
   padding: 2rem;
   width: 100vw;
   height: 100vh;
+  margin-bottom: 100px;
+  background: var(--back2, #fff9e7);
 }
 
 .record-check-content {
@@ -89,7 +92,7 @@
 .content-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr); // 한 줄에 두 개씩 배치
-  gap: 2rem; // 아이템 사이 간격
+  gap: 1rem; // 아이템 사이 간격
   width: 100%;
   box-sizing: border-box;
 }

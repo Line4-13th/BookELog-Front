@@ -28,8 +28,8 @@
   margin-top: 1rem;
   text-align: center;
   box-sizing: border-box;
-  height: 80vw;
-  overflow-y: scroll;
+  height: 100vh;
+  margin-bottom: 100px;
 }
 
 .book-detail-header {
@@ -62,7 +62,7 @@
 }
 
 .full-content img {
-  max-width: 100vw; /* 화면에 맞게 이미지 크기 조정 */
+  width: 10rem; /* 화면에 맞게 이미지 크기 조정 */
   height: auto;
   margin-bottom: 2rem;
 }

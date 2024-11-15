@@ -105,7 +105,10 @@ function RecordCheck() {
                       alt={record.book_title}
                       onClick={() =>
                         navigate("/fullcontent", {
-                          state: { bookTitle: record.book_title },
+                          state: {
+                            logId: record.id,
+                            bookTitle: record.book_title,
+                          },
                         })
                       }
                       onError={(e) => {
