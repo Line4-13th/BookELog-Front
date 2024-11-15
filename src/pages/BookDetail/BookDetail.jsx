@@ -10,7 +10,7 @@ import BASE_URL from "../../../API_URL"; // API URL
 
 const BookDetail = () => {
   const navigate = useNavigate();
-  const { book_id } = useParams(); // ✨ URL에서 book_id 가져오기
+  const { book_id } = useParams(); // URL에서 book_id 가져오기
 
   const [book, setBook] = useState(null);
   const [reviews, setReviews] = useState([]);
@@ -19,9 +19,10 @@ const BookDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // ✨ 모달 상태와 별점 선택 상태
+  // 모달 상태와 별점 선택 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRating, setSelectedRating] = useState(0);
+  const [reviewContent, setReviewContent] = useState(""); // ✨ 리뷰 내용 추가
 
   useEffect(() => {
     const fetchBookDetail = async () => {
@@ -62,16 +63,31 @@ const BookDetail = () => {
     setSelectedItem(index);
   };
 
-  // ✨ 별점 POST 요청
+  // ✨ 리뷰 및 별점 POST 요청
   const postRating = async () => {
     try {
-      await axios.post(`${BASE_URL}/api/books/bookdetail/${book_id}/review/`, {
-        userName: "",
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`, // 인증 토큰 추가
+      };
+
+      const requestBody = {
+        username: "사용자 이름", // 실제 사용자 이름 입력
         rating: selectedRating,
-        content: "",
-      });
-      alert("별점이 저장되었습니다!");
+        content: reviewContent, // 작성한 리뷰 내용
+      };
+
+      await axios.post(
+        `${BASE_URL}/api/books/bookdetail/${book_id}/review/`,
+        requestBody,
+        { headers }
+      );
+
+      alert("리뷰와 별점이 저장되었습니다!");
       setIsModalOpen(false);
+      setReviewContent(""); // 리뷰 입력 초기화
+      setSelectedRating(0); // 별점 초기화
+
       // 새 데이터 가져오기
       const response = await axios.get(
         `${BASE_URL}/api/books/bookdetail/${book_id}/`
@@ -79,8 +95,8 @@ const BookDetail = () => {
       setReviews(response.data.reviews);
       calculateRatingStats(response.data.reviews);
     } catch (error) {
-      console.error("별점 저장 중 오류 발생:", error);
-      alert("별점을 저장하는 데 실패했습니다.");
+      console.error("리뷰 저장 중 오류 발생:", error);
+      alert("리뷰 저장에 실패했습니다.");
     }
   };
 
@@ -161,6 +177,14 @@ const BookDetail = () => {
                   <input
                     className="review"
                     placeholder="당신의 한 줄 리뷰를 남겨주세요!"
+                    value={reviewContent}
+                    onChange={(e) => setReviewContent(e.target.value)}
+                    onKeyPress={(e) => {
+                      if (e.key === "Enter") {
+                        postRating(); // 엔터 키 입력 시 리뷰 저장
+                      }
+                    }}
+                    // ✨ 리뷰 내용 설정
                   />
                 </div>
                 <div className="onesentence-list">
@@ -187,7 +211,7 @@ const BookDetail = () => {
 
             {selectedItem === 2 && <Question />}
 
-            {/* ✨ 별점 모달 */}
+            {/* 별점 모달 */}
             {isModalOpen && (
               <div
                 className="modal-overlay"

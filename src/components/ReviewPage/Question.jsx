@@ -12,13 +12,12 @@ const Question = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null); // 선택된 질문
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [newQuestion, setNewQuestion] = useState(""); // 새로운 질문 상태
   const [newAnswer, setNewAnswer] = useState(""); // 새로운 답변 상태
   const [user, setUser] = useState(null); // 로그인된 사용자 정보
 
   useEffect(() => {
-    // 로그인 상태 확인 및 사용자 정보 가져오기
     const storedUser = JSON.parse(localStorage.getItem("userData")); // 로컬 스토리지에서 사용자 정보 가져오기
-
     if (storedUser) {
       console.log("로그인된 사용자 정보:", storedUser);
       setUser(storedUser); // 상태에 사용자 정보 설정
@@ -26,7 +25,6 @@ const Question = () => {
       console.warn("사용자가 로그인되어 있지 않습니다.");
     }
 
-    // 질문 데이터 가져오기
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
@@ -45,6 +43,29 @@ const Question = () => {
 
     fetchQuestions();
   }, [book_id]);
+
+  const postQuestion = async () => {
+    if (!newQuestion.trim()) {
+      alert("질문을 입력해주세요.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/books/bookdetail/${book_id}/qna/`,
+        {
+          username: user?.username || "Unknown User", // 로컬스토리지에서 가져온 username 사용
+          content: newQuestion,
+        }
+      );
+      console.log("New question submitted:", response.data);
+      setNewQuestion(""); // 질문 입력 초기화
+      setQuestions((prev) => [...prev, response.data]); // 새로운 질문 추가
+    } catch (error) {
+      console.error("질문 저장 중 오류 발생:", error);
+      alert("질문을 저장하는 데 실패했습니다.");
+    }
+  };
 
   const handleOpenModal = async (questionId) => {
     try {
@@ -74,16 +95,15 @@ const Question = () => {
       const response = await axios.post(
         `${BASE_URL}/api/books/bookdetail/${book_id}/${questionId}/answer/`,
         {
-          username: user?.username || "Unknown User", // 로그인된 사용자 이름 사용
+          username: user?.username || "Unknown User", // 로컬스토리지에서 가져온 username 사용
           content: newAnswer,
         }
       );
       console.log("Answer submitted:", response.data);
-      console.log("현재 사용자 이름:", user?.username); // username 값 확인용 로그
 
-      // 모달 닫기 후 질문 갱신
-      handleOpenModal(selectedQuestion.id);
-      setNewAnswer("");
+      // 선택된 질문 데이터 갱신
+      handleOpenModal(questionId);
+      setNewAnswer(""); // 답변 입력 초기화
     } catch (error) {
       console.error("답변 저장 중 오류 발생:", error);
       alert("답변을 저장하는 데 실패했습니다.");
@@ -102,11 +122,21 @@ const Question = () => {
           <input
             className="question-input"
             placeholder="책 내용에 대한 궁금증을 작성해보세요!"
+            value={newQuestion}
+            onChange={(e) => setNewQuestion(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                postQuestion(); // 엔터 키 입력 시 질문 저장
+              }
+            }}
           />
+          {/* <button onClick={postQuestion} className="submit-question">
+            질문 등록
+          </button> */}
         </div>
       </div>
 
-      {/* 답변 모음 */}
+      {/* 질문 목록 */}
       <div className="back-container">
         {questions.map((item) => (
           <div key={item.id} className="question-ccontainer">
@@ -146,7 +176,7 @@ const Question = () => {
                 onChange={(e) => setNewAnswer(e.target.value)}
               />
               <button
-                onClick={() => handleAnswerSubmit(selectedQuestion)}
+                onClick={() => handleAnswerSubmit(selectedQuestion.id)}
                 className="submit-answer"
               >
                 답변 등록
