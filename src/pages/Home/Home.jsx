@@ -83,7 +83,7 @@ function Home() {
         {searchQuery !== '' ? (
           <div className="home-grid">
             {searchResults.map((book, index) => (
-              <div key={index} className="home-book-item">
+              <div key={index} className="home-book-item" onClick={() => handleBookClick(book.id)}>
                 <img src={book.cover_image} alt={`${book.title} cover`} className="home-book-cover" />
                 <p className="record-book-introduction">{book.introduction}</p>
               </div>
