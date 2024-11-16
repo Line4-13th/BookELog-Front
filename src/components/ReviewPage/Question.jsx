@@ -115,7 +115,7 @@ const Question = () => {
     }
 
     console.log("POST 요청 payload:", {
-      username: user?.username || "Unknown User",
+      username: user?.userId || "Unknown User",
       content: newAnswer,
     });
 
