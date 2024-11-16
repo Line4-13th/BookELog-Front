@@ -79,4 +79,48 @@ $back-button-height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+
+.record-book-search-result {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 한 행에 3개의 아이템 */
+  gap: 1rem; /* 각 아이템 간격 */
+  padding-right: 1.8rem;
+  padding-left: 1rem;
+  justify-items: center; /* 아이템을 중앙에 정렬 */
+  box-sizing: border-box;
+  width: 100vw;
+  margin-left: 0;
+  margin-top: 1vh;
+}
+
+.record-book-item {
+  
+}
+
+@media (max-height: 670px) {
+  .record-book-item {
+    margin-top: 3vh;
+  }
+}
+
+.record-book-cover {
+  width: 7rem;
+  margin: 0;
+}
+
+.record-book-info {
+  width: 4rem;
+  height: auto;
+  margin-top: 0;
+  margin-left: 1rem;
+  background-color: white;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.6rem;
+  color:#53301F;
+
+  outline: 4px solid white;
+  border: 1px solid #53301F;
 }

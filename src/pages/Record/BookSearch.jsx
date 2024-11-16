@@ -3,10 +3,12 @@ import axios from 'axios';
 import glass from '../../assets/magnifyingglass_brown.svg';
 import './booksearch.scss';
 import API_URL from '../../../API_URL';
+import { useNavigate } from 'react-router-dom';
 
 function BookSearch() {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -14,13 +16,21 @@ function BookSearch() {
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    if (searchQuery.trim() === '') return;
+    if (searchQuery.trim() === '') {
+      setSearchResults([]);
+      return;
+    };
+    console.log(searchQuery);
 
     try {
-      const response = await axios.get(`${API_URL}/reading_log/books/search/`, {
-        params: { title: searchQuery },
-      });
-      setSearchResults(response.data);
+      const response = await axios.get(`${API_URL}/api/books/?search=${searchQuery}`);
+      console.log(response.data);
+      if (Array.isArray(response.data)) {
+        setSearchResults(response.data);
+      } else {
+        console.error("Unexpected data format:", response.data);
+        setSearchResults([]);
+      }
     } catch (error) {
       console.error('검색결과 fetch 오류: ', error);
     }
@@ -29,7 +39,7 @@ function BookSearch() {
   return (
     <div className="book-search-container">
       <header className="book-search-header">
-        <button className="back-button" />
+        <button className="back-button" onClick={() => navigate(-1)} />
         <p className="book-search-title">책 검색</p>
       </header>
       <div className="book-search-main">
@@ -45,10 +55,13 @@ function BookSearch() {
         <div className="record-book-search-result">
           {searchResults.map((book, index) => (
             <div key={index} className="record-book-item">
-              <img src={book.cover_image} alt={`${book.title} cover`} className="record-book-cover" />
+              <img
+                src={book.cover_image}
+                alt={`${book.title} cover`} className="record-book-cover"
+                onClick={()=>navigate(`/book-detail/${book.id}`)}
+              />
               <div className="record-book-info">
-                <p className="record-book-title">{book.title}</p>
-                <p className="record-book-author">{book.author}</p>
+                <p className="record-book-title">{book.introduction}</p>
               </div>
             </div>
           ))}
