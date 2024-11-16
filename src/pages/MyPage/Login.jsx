@@ -1,18 +1,18 @@
 // src/pages/Home/Login.jsx
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import API_URL from '../../../API_URL';
-import './Login.scss';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import API_URL from "../../../API_URL";
+import "./Login.scss";
 
 function Login({ setView }) {
-  const [loginUserId, setLoginUserId] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
+  const [loginUserId, setLoginUserId] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    if (loginUserId.trim() === '' || loginPassword.trim() === '') {
-      alert('아이디와 비밀번호를 입력해주세요.');
+    if (loginUserId.trim() === "" || loginPassword.trim() === "") {
+      alert("아이디와 비밀번호를 입력해주세요.");
       return;
     }
 
@@ -23,26 +23,33 @@ function Login({ setView }) {
         password: loginPassword,
       });
 
-      if (response.data.message === '로그인 성공') {
+      if (response.data.message === "로그인 성공") {
         const storedUserData = {
           userId: loginUserId,
-          nickname: response.data.nickname || 'User', // Use nickname from response or default to 'User'
+          nickname: response.data.nickname || "User", // Use nickname from response or default to 'User'
         };
 
         // Store user data in localStorage for session persistence
-        localStorage.setItem('userData', JSON.stringify(storedUserData));
+        localStorage.setItem("userData", JSON.stringify(storedUserData));
+        console.log("저장된 사용자 데이터:", localStorage.getItem("userData")); // 로컬 스토리지에 저장된 데이터 확인
 
         // Redirect to ProfilePage with nickname state
-        navigate('/profile', { state: { nickname: storedUserData.nickname } });
+        navigate("/profile", { state: { nickname: storedUserData.nickname } });
       } else {
-        alert(response.data.message || '아이디 또는 비밀번호가 일치하지 않습니다.');
+        alert(
+          response.data.message || "아이디 또는 비밀번호가 일치하지 않습니다."
+        );
       }
     } catch (error) {
-      console.error('로그인 오류:', error);
+      console.error("로그인 오류:", error);
       if (error.response) {
-        alert(`로그인 실패: ${error.response.data.message || '요청에 실패했습니다.'}`);
+        alert(
+          `로그인 실패: ${
+            error.response.data.message || "요청에 실패했습니다."
+          }`
+        );
       } else {
-        alert('서버와의 연결에 문제가 있습니다.');
+        alert("서버와의 연결에 문제가 있습니다.");
       }
     }
   };
@@ -68,13 +75,11 @@ function Login({ setView }) {
         </span>
       </div>
       <div className="link-text">
-        계정이 없으신가요? <span onClick={() => setView('signup')}>회원가입</span>
+        계정이 없으신가요?{" "}
+        <span onClick={() => setView("signup")}>회원가입</span>
       </div>
     </div>
   );
 }
 
 export default Login;
-
-
-
