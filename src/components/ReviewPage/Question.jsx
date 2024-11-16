@@ -16,15 +16,29 @@ const Question = () => {
   const [newAnswer, setNewAnswer] = useState(""); // 새로운 답변 상태
   const [user, setUser] = useState(null); // 로그인된 사용자 정보
 
+  // 로컬 스토리지에서 사용자 데이터 불러오기
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("userData")); // 로컬 스토리지에서 사용자 정보 가져오기
-    if (storedUser) {
-      console.log("로그인된 사용자 정보:", storedUser);
-      setUser(storedUser); // 상태에 사용자 정보 설정
-    } else {
-      console.warn("사용자가 로그인되어 있지 않습니다.");
-    }
+    const storedUser = localStorage.getItem("userData");
+    console.log("localStorage에서 가져온 userData:", storedUser);
 
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        console.log("파싱된 사용자 정보:", parsedUser);
+        setUser(parsedUser);
+      } catch (error) {
+        console.error("userData 파싱 중 오류 발생:", error);
+        setUser(null); // 파싱 오류 시 null로 설정
+      }
+    } else {
+      console.warn("localStorage에 userData가 없습니다.");
+      setUser(null); // userData가 없을 때 null로 설정
+    }
+    setLoading(false);
+  }, []);
+
+  // 질문 목록 불러오기
+  useEffect(() => {
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
@@ -44,17 +58,23 @@ const Question = () => {
     fetchQuestions();
   }, [book_id]);
 
+  // 질문 POST 요청
   const postQuestion = async () => {
     if (!newQuestion.trim()) {
       alert("질문을 입력해주세요.");
       return;
     }
 
+    console.log("POST 요청 payload:", {
+      username: user?.userId || "Unknown User",
+      content: newQuestion,
+    });
+
     try {
       const response = await axios.post(
-        `${BASE_URL}/api/books/bookdetail/${book_id}/qna/`,
+        `${BASE_URL}/api/books/bookdetail/${book_id}/question/`,
         {
-          username: user?.username || "Unknown User", // 로컬스토리지에서 가져온 username 사용
+          username: user?.userId || "Unknown User", // 로컬 스토리지에서 userId 사용
           content: newQuestion,
         }
       );
@@ -67,6 +87,7 @@ const Question = () => {
     }
   };
 
+  // 모달 열기
   const handleOpenModal = async (questionId) => {
     try {
       const response = await axios.get(
@@ -80,22 +101,29 @@ const Question = () => {
     }
   };
 
+  // 모달 닫기
   const handleCloseModal = () => {
     setSelectedQuestion(null);
     setNewAnswer(""); // 모달 닫을 때 입력 필드 초기화
   };
 
+  // 답변 POST 요청
   const handleAnswerSubmit = async (questionId) => {
     if (!newAnswer.trim()) {
       alert("답변을 입력해주세요.");
       return;
     }
 
+    console.log("POST 요청 payload:", {
+      username: user?.userId || "Unknown User",
+      content: newAnswer,
+    });
+
     try {
       const response = await axios.post(
         `${BASE_URL}/api/books/bookdetail/${book_id}/${questionId}/answer/`,
         {
-          username: user?.username || "Unknown User", // 로컬스토리지에서 가져온 username 사용
+          username: user?.userId || "Unknown User", // 로컬 스토리지에서 userId 사용
           content: newAnswer,
         }
       );
@@ -117,6 +145,11 @@ const Question = () => {
     <div>
       {/* 질문 입력 영역 */}
       <div className="question-container">
+        <div className="user-info">
+          {/* <p>
+            로그인된 사용자: <strong>{user?.userId || "게스트"}</strong>
+          </p> */}
+        </div>
         <div className="question-back">
           <img src={magnifying} alt="magnifying" />
           <input
@@ -130,9 +163,6 @@ const Question = () => {
               }
             }}
           />
-          {/* <button onClick={postQuestion} className="submit-question">
-            질문 등록
-          </button> */}
         </div>
       </div>
 

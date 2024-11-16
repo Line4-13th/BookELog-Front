@@ -23,6 +23,7 @@ const BookDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRating, setSelectedRating] = useState(0);
   const [reviewContent, setReviewContent] = useState(""); // ✨ 리뷰 내용 추가
+  const [user, setUser] = useState(null); // 로그인된 사용자 정보
 
   useEffect(() => {
     const fetchBookDetail = async () => {
@@ -63,37 +64,66 @@ const BookDetail = () => {
     setSelectedItem(index);
   };
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("userData");
+    console.log("localStorage에서 가져온 userData:", storedUser);
+
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        console.log("파싱된 사용자 정보:", parsedUser);
+        setUser(parsedUser);
+      } catch (error) {
+        console.error("userData 파싱 중 오류 발생:", error);
+        setUser(null); // 파싱 오류 시 null로 설정
+      }
+    } else {
+      console.warn("localStorage에 userData가 없습니다.");
+      setUser(null); // userData가 없을 때 null로 설정
+    }
+    setLoading(false);
+  }, []);
+
   // ✨ 리뷰 및 별점 POST 요청
   const postRating = async () => {
+    if (!reviewContent.trim()) {
+      alert("별점이 저장되었습니다.");
+      return;
+    }
+
+    if (!user || !user.userId) {
+      alert("사용자 정보를 찾을 수 없습니다. 로그인 해주세요.");
+      return;
+    }
+
+    console.log("POST 요청 payload:", {
+      username: user.userId, // 로컬 스토리지에서 가져온 사용자 이름
+      rating: selectedRating, // 선택된 별점
+      content: reviewContent, // 작성한 리뷰 내용
+    });
+
     try {
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("authToken")}`, // 인증 토큰 추가
-      };
-
-      const requestBody = {
-        username: "사용자 이름", // 실제 사용자 이름 입력
-        rating: selectedRating,
-        content: reviewContent, // 작성한 리뷰 내용
-      };
-
-      await axios.post(
+      const response = await axios.post(
         `${BASE_URL}/api/books/bookdetail/${book_id}/review/`,
-        requestBody,
-        { headers }
+        {
+          username: user.userId, // 실제 사용자 이름을 로컬 스토리지에서 가져오기
+          rating: selectedRating, // 별점
+          content: reviewContent, // 리뷰 내용
+        }
       );
+      console.log("New review submitted:", response.data);
 
       alert("리뷰와 별점이 저장되었습니다!");
       setIsModalOpen(false);
-      setReviewContent(""); // 리뷰 입력 초기화
+      setReviewContent(""); // 리뷰 내용 초기화
       setSelectedRating(0); // 별점 초기화
 
-      // 새 데이터 가져오기
-      const response = await axios.get(
+      // 새 데이터 가져오기 (리뷰 목록과 평균 별점 업데이트)
+      const bookResponse = await axios.get(
         `${BASE_URL}/api/books/bookdetail/${book_id}/`
       );
-      setReviews(response.data.reviews);
-      calculateRatingStats(response.data.reviews);
+      setReviews(bookResponse.data.reviews); // 새로 받아온 리뷰 리스트로 업데이트
+      calculateRatingStats(bookResponse.data.reviews); // 평균 별점 계산
     } catch (error) {
       console.error("리뷰 저장 중 오류 발생:", error);
       alert("리뷰 저장에 실패했습니다.");
