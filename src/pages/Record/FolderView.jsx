@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './folderview.scss';
 import folderImage from '../../assets/Folder.png';
@@ -9,6 +10,7 @@ function FolderView() {
   const [folders, setFolders] = useState([]);
   const [newFolderName, setNewFolderName] = useState('');
   const [isAddingFolder, setIsAddingFolder] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`${API_URL}/api/reading_log/folders/`)
@@ -55,6 +57,11 @@ function FolderView() {
     setNewFolderName(e.target.value);
   };
 
+  const handleFolderClick = (folderId) => {
+    console.log(`navigating to folder ${folderId}`);
+    navigate(`/recordcheck`);
+  };
+
   return (
     <div className="folder-view">
       {folders.map((folder) => (
@@ -62,6 +69,7 @@ function FolderView() {
           <div
             className="folder-icon"
             style={{ backgroundImage: `url(${folder.image})` }}
+            onClick={()=>handleFolderClick(folder.id)}
           ></div>
           <p className="folder-name">{folder.name}</p>
         </div>

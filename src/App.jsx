@@ -43,6 +43,8 @@ function App() {
         <Route path="/curationItem" element={<CurationItem />} />
         <Route path="/booksearch" element={<BookSearch />} />
         <Route path="/book-detail" element={<BookDetailPage />} />
+        <Route path="/book-detail/:bookId" element={<BookDetail />} />
+        {/* !!!!!!!!!!!!!!! 추가한 루트! - 안소현 */}
         <Route path="/record" element={<Record />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/login" element={<Login />} />
