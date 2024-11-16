@@ -87,7 +87,7 @@ const BookDetail = () => {
   // ✨ 리뷰 및 별점 POST 요청
   const postRating = async () => {
     if (!reviewContent.trim()) {
-      alert("리뷰 내용을 입력해주세요.");
+      alert("별점이 저장되었습니다.");
       return;
     }
 

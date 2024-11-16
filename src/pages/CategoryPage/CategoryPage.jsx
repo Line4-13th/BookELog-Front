@@ -11,13 +11,14 @@ import NavBar from "../../components/Navbar";
 const CategoryPage = () => {
   const [isSearching, setIsSearching] = useState(false); // ✨ 검색 상태 관리
   const categories = [
-    "시∙에세이",
+    "시,에세이",
     "장편 소설",
     "단편 소설",
     "인문학",
     "여행",
     "외국어",
-    "ddd",
+    "역사",
+    "자기계발",
   ];
 
   const navigate = useNavigate();
