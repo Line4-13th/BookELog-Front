@@ -160,6 +160,7 @@ const Question = () => {
             onKeyPress={(e) => {
               if (e.key === "Enter") {
                 postQuestion(); // 엔터 키 입력 시 질문 저장
+                alert("리뷰와 별점이 저장되었습니다!");
               }
             }}
           />
