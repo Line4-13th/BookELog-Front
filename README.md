@@ -55,14 +55,19 @@ The design for Book-e-log was created in Figma. Check out the design here: [Figm
 1. Clone the repository:
    ```bash
    git clone https://github.com/Line4-13th/BookELog-Front
-   cd book-e-log```
+   cd book-e-log
+
 2. Install dependencies:
     ```bash
-    npm install```
+    npm install
+
 3. Run the development server:
     ```bash
-    npm run dev```
+    npm run dev
 
 ## Acknowledgements 🙌
 - Developed as part of the Line 4 Hackathon.
 - Special thanks to out team members!
+
+## Example Screen
+![Example Screen Picture](../sample.png)
