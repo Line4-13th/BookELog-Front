@@ -70,4 +70,4 @@ The design for Book-e-log was created in Figma. Check out the design here: [Figm
 - Special thanks to out team members!
 
 ## Example Screen
-![Example Screen Picture](../sample.png)
+![Example Screen Picture](sample.png)
