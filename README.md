@@ -47,7 +47,7 @@ The design for Book-e-log was created in Figma. Check out the design here: [Figm
 ## Tech Stack 🛠️
 - **Frontend:** React, Vite, and JavaScript
 - **Backend:** Django REST Framework
-- **Styling:** SCSS
+- **Styling:** SASS
 - **State Management:** Context API
 
 ## How to Run Locally 🖥️
